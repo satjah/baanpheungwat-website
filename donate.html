@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<!--
+  MOCKUP — baanpheungwat.org (Phase 0)
+  บ้านพึ่งวัด ภูเก็ต · หน้า "ร่วมบริจาค"
+  ก๊อป head/header/footer/script จาก index.html (canonical) ตาม DESIGN_RULES.md §1
+  สร้างตาม website_design_fable.md §4 (โครงหน้า donate.html)
+  🟡 mockup — ยังไม่ launch จริง · QR/เบอร์โทร/unit cost/รายงานการเงิน ยังเป็น placeholder ติด .todo ทั้งหมด
+-->
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>ร่วมบริจาค — บ้านพึ่งวัด ภูเก็ต</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@600;700&family=Sarabun:wght@400;500&family=Open+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green:#007040;
+    --green-deep:#00532F;
+    --pink:#F88898;
+    --pink-soft:#FDECEF;
+    --green-soft:#EAF4EE;
+    --ink:#243329;
+    --paper:#FBFAF7;
+    --hairline:#E4E0D8;
+    --maxw:1140px;
+    --ease:cubic-bezier(.22,1,.36,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Sarabun',-apple-system,'Thonburi',sans-serif;color:var(--ink);
+    background:var(--paper);font-size:18px;line-height:1.8;overflow-x:hidden}
+  h1,h2,h3{font-family:'Anuphan',sans-serif;line-height:1.3;color:var(--green-deep);text-wrap:balance}
+  p{text-wrap:pretty}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  section{padding:clamp(72px,10vw,120px) 0}
+  a{color:var(--green);text-decoration:none}
+  .en{font-family:'Open Sans',sans-serif}
+  h2{font-size:clamp(1.85rem,3.4vw,2.5rem)}
+
+  /* kicker label + หัวใจจิ๋ว bullet */
+  .label{font-family:'Open Sans',sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.08em;
+    font-size:13px;color:var(--green-deep);padding-left:22px;background-repeat:no-repeat;background-position:left center;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='14' viewBox='0 0 16 14'%3E%3Cpath d='M7.6 12 C3 9 1 6.2 1 3.6 C1 1.4 3 0.4 5 1.3 C6.4 1.9 7.2 3 7.6 4' fill='none' stroke='%23F88898' stroke-width='1.4' stroke-linecap='round'/%3E%3Cpath d='M8.4 12 C13 9 15 6.2 15 3.6 C15 1.4 13 0.4 11 1.3 C9.6 1.9 8.8 3 8.4 4' fill='none' stroke='%23F88898' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E")}
+  .label.on-dark{color:#EAF4EE}
+
+  .todo{font-family:'Open Sans',sans-serif;font-size:11px;font-weight:700;color:#B4541F;
+    background:#FCEEE3;border-radius:4px;padding:1px 7px;vertical-align:middle;white-space:nowrap;letter-spacing:.02em}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:var(--d,0s)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* buttons */
+  .btn{display:inline-block;font-family:'Anuphan',sans-serif;font-weight:600;padding:13px 28px;border-radius:8px;
+    font-size:16px;cursor:pointer;transition:.25s;border:2px solid transparent}
+  .btn:hover{transform:translateY(-1px)}
+  .btn-green{background:var(--green);color:#fff;box-shadow:0 4px 14px -4px rgba(0,112,64,.4)}
+  .btn-green:hover{background:var(--green-deep)}
+  .btn-white{background:#fff;color:var(--green)}
+  .btn-white:hover{background:var(--green-soft)}
+  .btn-outline{border-color:var(--green);color:var(--green);background:transparent}
+  .btn-outline:hover{background:rgba(0,112,64,.08)}
+  .btn-outline-white{border-color:#fff;color:#fff;background:transparent}
+  .btn-outline-white:hover{background:rgba(255,255,255,.14)}
+
+  /* heart-line divider */
+  .hdiv{display:flex;align-items:center;gap:14px;max-width:340px;margin:0 auto}
+  .hdiv .ln{flex:1;height:1px;background:var(--hairline)}
+  .hdiv svg{width:22px;height:19px;flex-shrink:0}
+
+  /* header */
+  header{position:sticky;top:0;z-index:50;background:#fff;box-shadow:0 1px 6px rgba(0,83,47,.06);transition:box-shadow .3s}
+  header.scrolled{box-shadow:0 4px 18px rgba(0,83,47,.13)}
+  .nav{display:flex;align-items:center;gap:24px;padding:10px 24px;max-width:var(--maxw);margin:0 auto}
+  .logo{display:flex;align-items:center;flex:1}
+  .logo-img{height:54px;width:auto;display:block}
+  nav.menu{display:flex;align-items:center;gap:22px}
+  nav.menu a{font-family:'Anuphan';font-weight:600;font-size:15px;color:var(--ink)}
+  nav.menu a:hover{color:var(--green)}
+  .burger{display:none;width:42px;height:36px;position:relative;cursor:pointer;flex:none}
+  .burger i{position:absolute;left:9px;right:9px;height:2.5px;border-radius:2px;background:var(--green-deep)}
+  .burger i:nth-child(1){top:10px}.burger i:nth-child(2){top:17px}.burger i:nth-child(3){top:24px}
+  #mtoggle{display:none}
+
+  /* impact */
+  .impact{background:#fff}
+  .impact .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;text-align:center}
+  .impact .grid>div{min-width:0}
+  .impact .num{font-family:'Open Sans';font-weight:800;font-size:clamp(2.4rem,5vw,3.2rem);color:var(--green);
+    line-height:1.05;font-variant-numeric:tabular-nums;display:inline-block}
+  .impact .num .unit{font-size:.48em;color:var(--ink)}
+  .impact .uline{height:2px;width:44px;margin:10px auto 0;background:var(--pink);transform:scaleX(0);transform-origin:center;
+    transition:transform .9s var(--ease) .3s}
+  .impact .in .uline{transform:scaleX(1)}
+  .impact .cap{font-size:15px;color:var(--ink);margin-top:8px;line-height:1.5}
+
+  /* บ้านนี้คืออะไร / การ์ด 3 ใบ */
+  .about3{background:var(--paper)}
+  .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:36px}
+  .card3{border:1px solid var(--hairline);border-radius:10px;background:#fff;padding:30px 26px;transition:box-shadow .4s,transform .4s,border-color .4s;min-width:0}
+  .card3:hover{transform:translateY(-3px);border-color:var(--green);box-shadow:0 16px 40px -18px rgba(0,83,47,.25)}
+  .card3 .ico{width:44px;height:44px;border-radius:50%;background:var(--green-soft);display:flex;align-items:center;
+    justify-content:center;margin-bottom:16px}
+  .card3 h3{font-size:19px;margin-bottom:8px;color:var(--green-deep)}
+  .card3 p{font-size:16px}
+
+  /* ขั้นตอน / phone-box */
+  .phone-box{background:#fff;border:1px solid var(--hairline);border-radius:10px;padding:22px 28px;display:flex;
+    align-items:center;gap:18px;flex-wrap:wrap;justify-content:space-between}
+  .phone-box .ptxt{font-family:'Open Sans';font-weight:800;font-size:clamp(1.4rem,2.6vw,1.9rem);color:var(--green-deep)}
+  .phone-box .plabel{font-size:15px;color:var(--ink)}
+
+  /* donate */
+  .donate{background:var(--paper)}
+  .donate .row{display:grid;grid-template-columns:5fr 7fr;gap:48px;align-items:center}
+  .donate .row>div{min-width:0}
+  .qr-box{aspect-ratio:1/1;max-width:280px;border:1.5px dashed var(--hairline);border-radius:10px;background:#fff;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:20px}
+  .qr-box .icon{font-size:34px;opacity:.6}
+  .qr-box span{font-family:'Open Sans';font-size:13px;font-weight:600;color:var(--ink)}
+  .acct{background:var(--green-soft);border-radius:10px;padding:22px 26px;margin:18px 0}
+  .acct .bank{font-family:'Open Sans';font-weight:700;font-size:14px;color:var(--green-deep);letter-spacing:.03em;margin-bottom:6px}
+  .acct .name{font-family:'Anuphan';font-weight:600;font-size:18px;margin-bottom:10px}
+  .acct .no{font-family:'Open Sans';font-weight:800;font-size:22px;color:var(--green);letter-spacing:.03em}
+  .tax-line{font-size:15px;color:var(--ink);border-left:3px solid var(--pink);padding-left:14px;margin:18px 0}
+
+  /* footer */
+  footer{background:var(--green-deep);color:rgba(255,255,255,.88);font-size:15px}
+  footer .cols{display:grid;grid-template-columns:1.3fr 1fr 1.1fr 1fr;gap:32px;padding:56px 24px 30px;max-width:var(--maxw);margin:0 auto}
+  footer h4{color:#fff;font-family:'Anuphan';font-weight:600;font-size:16px;margin-bottom:14px}
+  footer a{color:rgba(255,255,255,.78);display:block;margin-bottom:7px}
+  footer a:hover{color:#fff}
+  footer .flogo{background:#fff;display:inline-block;border-radius:8px;padding:9px 14px;margin-bottom:14px}
+  footer .flogo img{height:44px;display:block}
+  footer .addr{color:rgba(255,255,255,.78);line-height:1.7;font-size:14.5px}
+  .supp-mini{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:rgba(255,255,255,.65)}
+  footer .bottom{border-top:1px solid rgba(255,255,255,.16);padding:20px 24px 34px;max-width:var(--maxw);margin:0 auto;
+    text-align:center;font-size:13px;color:rgba(255,255,255,.6)}
+  footer .bottom .h-en{font-style:italic;display:block;margin:8px 0}
+
+  /* ===== page-top pattern (หน้ารอง) ===== */
+  .page-hero{background:linear-gradient(160deg,var(--green-deep),#003D22);color:#fff;padding:110px 0 58px;text-align:center}
+  .page-hero .label{color:rgba(255,255,255,.75)}
+  .page-hero h1{color:#fff;font-size:clamp(1.9rem,3.6vw,2.7rem);margin-top:10px}
+  .page-hero .sub{color:rgba(255,255,255,.85);font-size:clamp(1rem,1.5vw,1.1rem);margin-top:10px;max-width:640px;margin-inline:auto}
+
+  /* ===== donate.html เฉพาะหน้า ===== */
+  .donate-card{background:#fff;border:1px solid var(--hairline);border-radius:14px;padding:clamp(24px,4vw,44px);
+    box-shadow:0 20px 50px -30px rgba(0,83,47,.3)}
+  .acct-row{display:flex;align-items:center;flex-wrap:wrap;gap:10px;min-width:0}
+  .copy-btn{font-family:'Open Sans';font-weight:700;font-size:13px;color:var(--green);background:#fff;
+    border:1.5px solid var(--green);border-radius:6px;padding:6px 14px;cursor:pointer;transition:.2s}
+  .copy-btn:hover{background:var(--green-soft)}
+  .copy-btn.copied{background:var(--green);color:#fff}
+  .qr-note{font-size:15px;margin-top:16px;color:var(--ink)}
+
+  .goods{background:var(--green-soft)}
+  .goods-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:32px}
+  .goods-grid>div{min-width:0}
+  .goods-grid h3{font-size:18px;color:var(--green-deep);margin-bottom:8px}
+  .goods-grid p{font-size:16px}
+
+  .transparency{background:#fff}
+  .transparency p.lead{text-align:center;max-width:680px;margin:16px auto 0}
+  .table-scroll{overflow-x:auto;margin-top:28px;border:1px solid var(--hairline);border-radius:10px;min-width:0}
+  .txp-table{width:100%;border-collapse:collapse;min-width:520px}
+  .txp-table th,.txp-table td{padding:14px 18px;text-align:left;font-size:15px;border-bottom:1px solid var(--hairline);white-space:nowrap}
+  .txp-table thead th{font-family:'Open Sans';font-weight:700;font-size:13px;color:var(--green-deep);background:var(--green-soft);letter-spacing:.03em}
+  .txp-table tbody tr:last-child td{border-bottom:none}
+  .txp-note{margin-top:18px;font-size:15px}
+
+  .faq{background:var(--green-soft)}
+  .faq-list{max-width:760px;margin:32px auto 0}
+  .faq-item{border-bottom:1px solid var(--hairline);padding:18px 0}
+  .faq-item:last-child{border-bottom:none}
+  .faq-item summary{cursor:pointer;font-family:'Anuphan';font-weight:600;font-size:17px;color:var(--green-deep);
+    list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
+  .faq-item summary::-webkit-details-marker{display:none}
+  .faq-item summary::after{content:"+";font-family:'Open Sans';font-weight:700;font-size:20px;color:var(--green);
+    flex:none;transition:transform .25s var(--ease);line-height:1}
+  .faq-item[open] summary::after{transform:rotate(45deg)}
+  .faq-item p{margin-top:12px;font-size:16px;padding-right:28px}
+
+  @media(max-width:768px){
+    section{padding:56px 0}
+    .cards3,.goods-grid{grid-template-columns:1fr}
+    .donate .row{grid-template-columns:1fr;gap:28px}
+    .donate-card{padding:26px 20px}
+    footer .cols{grid-template-columns:1fr 1fr}
+    nav.menu{display:none;position:absolute;top:64px;left:0;right:0;background:#fff;flex-direction:column;gap:0;
+      padding:8px 0;box-shadow:0 8px 16px rgba(0,0,0,.12)}
+    nav.menu a{padding:12px 24px;width:100%;border-bottom:1px solid var(--hairline)}
+    nav.menu a.btn{margin:10px 24px;text-align:center}
+    #mtoggle:checked ~ nav.menu{display:flex}
+    .burger{display:block}
+    .phone-box{flex-direction:column;align-items:flex-start;gap:8px}
+    .todo{white-space:normal}
+    .faq-item summary{font-size:16px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important}
+    .reveal{opacity:1!important;transform:none!important;transition:none!important}
+    .faq-item summary::after{transition:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER (canonical) -->
+<header>
+  <div class="nav">
+    <input type="checkbox" id="mtoggle">
+    <a href="index.html" class="logo"><img src="logo.jpg" alt="บ้านพึ่งวัด ภูเก็ต — วัดเขารังสามัคคีธรรม" class="logo-img"></a>
+    <label for="mtoggle" class="burger" aria-label="เปิดเมนู"><i></i><i></i><i></i></label>
+    <nav class="menu">
+      <a href="index.html">หน้าแรก</a>
+      <a href="story.html">เรื่องราวของเรา</a>
+      <a href="stay.html">ขอเข้าพัก</a>
+      <a href="donate.html" aria-current="page" style="color:var(--green)">ร่วมบริจาค</a>
+      <a href="supporters.html">ผู้สนับสนุน</a>
+      <a href="contact.html">ติดต่อ</a>
+      <a href="donate.html" class="btn btn-green" style="padding:9px 20px;font-size:14px">บริจาค</a>
+    </nav>
+  </div>
+</header>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="wrap">
+    <div class="label" style="display:inline-block">ร่วมบริจาค</div>
+    <h1>ร่วมดูแลบ้านหลังนี้</h1>
+    <p class="sub">ทุกการบริจาคช่วยให้ผู้ป่วยและครอบครัวได้พักใกล้โรงพยาบาลโดยไม่มีค่าใช้จ่าย</p>
+  </div>
+</div>
+
+<!-- บล็อกบริจาคหลัก -->
+<section class="donate"><div class="wrap">
+  <div class="donate-card reveal">
+    <div class="row">
+      <div>
+        <div class="qr-box"><div class="icon">▦</div><span>QR e-Donation</span><span class="todo">.todo รอไฟล์ QR จริง</span></div>
+        <p class="qr-note">สแกนด้วยแอปธนาคารใดก็ได้ ระบบจะพาไปหน้ายืนยันการโอนของธนาคารคุณโดยตรง</p>
+      </div>
+      <div>
+        <div class="acct">
+          <div class="bank">ธนาคารออมสิน</div>
+          <div class="name">วัดเขารังสามัคคีธรรม (บ้านพึ่งวัด)</div>
+          <div class="acct-row">
+            <span class="no">0-204-8133-2086</span>
+            <button type="button" class="copy-btn" data-copy="0-204-8133-2086" data-default="คัดลอกเลขบัญชี" data-done="คัดลอกแล้ว">คัดลอกเลขบัญชี</button>
+          </div>
+        </div>
+        <div class="tax-line">เงินบริจาคลดหย่อนภาษีได้ตามจำนวนที่บริจาคจริง (1 เท่า) ผ่านระบบ e-Donation กรมสรรพากร — กดยินยอมส่งข้อมูลให้กรมสรรพากรในแอปธนาคารตอนสแกน แล้วสิทธิลดหย่อนเข้าระบบอัตโนมัติ ไม่ต้องเก็บเอกสาร</div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- เงินของคุณช่วยอะไร -->
+<section class="about3"><div class="wrap">
+  <div class="reveal" style="text-align:center">
+    <div class="label" style="display:inline-block">เงินของคุณช่วยอะไร</div>
+    <h2 style="margin-top:10px">ทุกบาทที่บริจาค นำไปใช้ตรงนี้</h2>
+  </div>
+  <div class="cards3">
+    <div class="card3 reveal" style="--d:0s">
+      <div class="ico">💧</div>
+      <h3>ค่าน้ำ-ไฟและการดูแลอาคาร 100 เตียง</h3>
+      <p>ค่าใช้จ่ายพื้นฐานที่ทำให้บ้านหลังนี้เปิดรับผู้เข้าพักได้อย่างต่อเนื่องทุกวัน</p>
+    </div>
+    <div class="card3 reveal" style="--d:.09s">
+      <div class="ico">🍚</div>
+      <h3>อาหารสำหรับผู้เข้าพัก <span style="font-weight:400;font-size:13px">(เฟสโรงครัวกำลังจะเริ่ม)</span></h3>
+      <p>สนับสนุนอาหารระหว่างพักรักษาตัว เพื่อให้ผู้ป่วยและครอบครัวไม่ต้องกังวลเรื่องมื้อถัดไป</p>
+    </div>
+    <div class="card3 reveal" style="--d:.18s">
+      <div class="ico">🧴</div>
+      <h3>ของใช้จำเป็นสำหรับผู้เข้าพัก</h3>
+      <p>ของใช้ในชีวิตประจำวันระหว่างพักรักษาตัวที่บ้านพึ่งวัด</p>
+    </div>
+  </div>
+  <p style="text-align:center;margin-top:32px;font-size:15px">จำนวนเงินแนะนำต่อรายการยังอยู่ระหว่างคำนวณต้นทุนจริง <span class="todo">.todo รอ unit cost จริงจากทีมบ้านพัก</span></p>
+</div></section>
+
+<!-- บริจาคสิ่งของ / อาสาสมัคร -->
+<section class="goods"><div class="wrap">
+  <div class="reveal" style="text-align:center">
+    <div class="label" style="display:inline-block">บริจาคสิ่งของ / อาสาสมัคร</div>
+    <h2 style="margin-top:10px">ช่วยได้อีกทางนอกจากเงิน</h2>
+  </div>
+  <div class="goods-grid">
+    <div class="reveal" style="--d:0s">
+      <h3>บริจาคสิ่งของ</h3>
+      <p>ของใช้จำเป็นสำหรับผู้เข้าพัก เช่น ผ้าอ้อมผู้ใหญ่ ข้าวสารอาหารแห้ง และของใช้ในชีวิตประจำวัน กรุณาติดต่อทีมงานก่อนนำมามอบ เพื่อให้ตรงกับความต้องการในช่วงนั้น</p>
+    </div>
+    <div class="reveal" style="--d:.09s">
+      <h3>เป็นอาสาสมัคร</h3>
+      <p>สนใจร่วมเป็นอาสาสมัครดูแลผู้เข้าพักหรือช่วยงานของบ้านพึ่งวัด ติดต่อผ่านช่องทางเดียวกันด้านล่างนี้</p>
+    </div>
+  </div>
+  <div class="phone-box reveal" style="margin-top:32px">
+    <div><div class="plabel">ติดต่อทีมงานก่อนนำของมามอบ หรือสมัครเป็นอาสาสมัคร</div>
+      <div class="ptxt">รอเบอร์ติดต่อ <span class="todo">.todo รอเบอร์</span></div></div>
+    <a href="contact.html" class="btn btn-outline">ช่องทางติดต่ออื่น</a>
+  </div>
+</div></section>
+
+<!-- ความโปร่งใส -->
+<section class="transparency"><div class="wrap">
+  <div class="reveal" style="text-align:center">
+    <div class="label" style="display:inline-block">ความโปร่งใส</div>
+    <h2 style="margin-top:10px">เงินทุกบาทตรวจสอบได้</h2>
+  </div>
+  <p class="lead reveal">บ้านพึ่งวัดรับบริจาคผ่านบัญชีเดียวในนามวัดเขารังสามัคคีธรรมเท่านั้น และรายงานรับ-จ่ายทุกเดือนไว้ที่นี่ เพื่อให้ผู้บริจาคตรวจสอบได้ตลอดเวลา</p>
+  <div class="table-scroll reveal">
+    <table class="txp-table">
+      <thead><tr><th>เดือน</th><th>รับ (บาท)</th><th>ใช้จ่าย (บาท)</th><th>คงเหลือ (บาท)</th></tr></thead>
+      <tbody>
+        <tr><td><span class="todo">.todo รอรายงานเดือนแรก</span></td><td>—</td><td>—</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="txp-note reveal">โครงการบ้านพึ่งวัดอยู่ภายใต้การดูแลของวัดเขารังสามัคคีธรรม อำเภอเมืองภูเก็ต จังหวัดภูเก็ต</p>
+</div></section>
+
+<!-- FAQ ภาษี -->
+<section class="faq"><div class="wrap">
+  <div class="reveal" style="text-align:center">
+    <div class="label" style="display:inline-block">คำถามที่พบบ่อย</div>
+    <h2 style="margin-top:10px">เรื่องภาษีที่ควรรู้ก่อนบริจาค</h2>
+  </div>
+  <div class="faq-list">
+    <details class="faq-item reveal" style="--d:0s">
+      <summary>e-Donation คืออะไร</summary>
+      <p>ระบบที่กรมสรรพากรเชื่อมกับวัด/มูลนิธิ/องค์กรที่มีสิทธิ์รับบริจาคโดยตรง เมื่อโอนเงินผ่านแอปธนาคารและกดยินยอมส่งข้อมูล ข้อมูลการบริจาคจะถูกส่งเข้าระบบให้อัตโนมัติ โดยไม่ต้องเก็บใบเสร็จหรือหลักฐานเอง</p>
+    </details>
+    <details class="faq-item reveal" style="--d:.06s">
+      <summary>ลดหย่อนภาษีได้เท่าไหร่</summary>
+      <p>ลดหย่อนได้ตามจำนวนที่บริจาคจริง (1 เท่า) ไม่เกินเพดาน 10% ของเงินได้หลังหักค่าใช้จ่ายและค่าลดหย่อนตามหลักเกณฑ์ของกรมสรรพากร</p>
+    </details>
+    <details class="faq-item reveal" style="--d:.12s">
+      <summary>ต้องขอใบอนุโมทนาบัตรไหม</summary>
+      <p>ไม่จำเป็นสำหรับการใช้สิทธิลดหย่อนภาษี เพราะระบบ e-Donation ส่งข้อมูลให้กรมสรรพากรโดยอัตโนมัติแล้ว ส่วนใบอนุโมทนาบัตรเป็นที่ระลึกและหลักฐานจากทางวัด สามารถขอเพิ่มเติมได้</p>
+    </details>
+    <details class="faq-item reveal" style="--d:.18s">
+      <summary>บริษัทหรือนิติบุคคลบริจาคได้ไหม</summary>
+      <p>บริจาคได้ แต่เงื่อนไขสิทธิประโยชน์ทางภาษีของนิติบุคคลแตกต่างจากบุคคลธรรมดา แนะนำให้ปรึกษาสำนักงานบัญชีของบริษัทก่อนดำเนินการ</p>
+    </details>
+  </div>
+</div></section>
+
+<!-- FOOTER (canonical) -->
+<footer>
+  <div class="cols">
+    <div>
+      <div class="flogo"><img src="logo.jpg" alt="บ้านพึ่งวัด ภูเก็ต"></div>
+      <div class="addr">87/7 ถ.เขารัง ต.รัษฎา<br>อ.เมืองภูเก็ต 83000</div>
+    </div>
+    <div><h4>เมนู</h4>
+      <a href="index.html">หน้าแรก</a><a href="story.html">เรื่องราวของเรา</a>
+      <a href="stay.html">ขอเข้าพัก</a><a href="donate.html">ร่วมบริจาค</a>
+    </div>
+    <div><h4>ข้อมูล</h4>
+      <a href="supporters.html">ผู้สนับสนุน</a><a href="contact.html">ติดต่อ</a>
+      <a href="privacy.html">นโยบายความเป็นส่วนตัว</a>
+    </div>
+    <div><h4>ติดต่อ</h4>
+      <a href="tel:#">โทร <span class="todo">.todo</span></a>
+      <a href="#">Facebook <span class="todo">.todo</span></a>
+      <a href="contact.html">ส่งข้อความถึงเรา</a>
+    </div>
+  </div>
+  <div class="bottom">
+    A Free Home for Patients and Families in Phuket
+    <span class="h-en">Operated with the support of Wat Khao Rang Samakkhitham, Phuket</span>
+    <div class="supp-mini" style="justify-content:center;margin:14px 0 10px">
+      <span>วัดเขารังสามัคคีธรรม</span><span>·</span><span>โรงพยาบาลวชิระภูเก็ต</span><span>·</span><span>มูลนิธิสิริวัฒนภักดี</span>
+    </div>
+    © 2569 บ้านพึ่งวัด ภูเก็ต · วัดเขารังสามัคคีธรรม
+  </div>
+</footer>
+
+<script>
+// scroll reveal (ครั้งเดียวแล้ว unobserve)
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15,rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+
+// header shadow on scroll
+var hd=document.querySelector('header');addEventListener('scroll',function(){hd.classList.toggle('scrolled',scrollY>4)},{passive:true});
+
+// คัดลอกเลขบัญชี
+document.querySelectorAll('.copy-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var text=btn.dataset.copy;
+    var mark=function(){
+      btn.textContent=btn.dataset.done;
+      btn.classList.add('copied');
+      setTimeout(function(){btn.textContent=btn.dataset.default;btn.classList.remove('copied')},1800);
+    };
+    var fallbackCopy=function(){
+      var ok=false;
+      var ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.select();
+      try{ok=document.execCommand('copy')}catch(e){}
+      document.body.removeChild(ta);
+      mark();
+      return ok;
+    };
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(mark)['catch'](fallbackCopy);
+    }else{
+      fallbackCopy();
+    }
+  });
+});
+</script>
+</body>
+</html>
