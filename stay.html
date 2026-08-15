@@ -112,6 +112,12 @@
   .elig-card p{font-size:16px}
   .elig-note{margin-top:18px;font-size:15px;color:var(--ink)}
 
+  /* stay gallery — ห้องพักจริง */
+  .stay-gallery{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:32px}
+  .stay-gallery>div{min-width:0}
+  .stay-gallery img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;display:block}
+  .stay-gallery .cap{font-size:14px;color:var(--ink);opacity:.75;margin-top:8px;text-align:center}
+
   /* callbox ใหญ่ */
   .callbox{background:var(--green-deep);border-radius:14px;padding:44px 30px;text-align:center;color:#fff}
   .callbox .clabel{font-family:'Open Sans',sans-serif;font-weight:600;font-size:14px;letter-spacing:.05em;
@@ -157,7 +163,7 @@
 
   @media(max-width:768px){
     section{padding:56px 0}
-    .elig-grid,.rules-box ul,.steps{grid-template-columns:1fr}
+    .elig-grid,.rules-box ul,.steps,.stay-gallery{grid-template-columns:1fr}
     .travel-row{grid-template-columns:1fr;gap:26px}
     .map-box{max-width:340px;margin:0 auto}
     footer .cols{grid-template-columns:1fr 1fr}
@@ -228,6 +234,16 @@
     </div>
   </div>
   <div class="elig-note reveal">เกณฑ์การพิจารณาโดยละเอียด <span class="todo">.todo รอทีมวัดยืนยันเกณฑ์ทางการ</span></div>
+  <div class="stay-gallery reveal" style="--d:.12s">
+    <div>
+      <img src="img/bedroom-view.jpg" width="675" height="900" loading="lazy" alt="ห้องพักรวมของบ้านพึ่งวัด เตียงเดี่ยวพร้อมตู้ข้างเตียงไม้และวิวป่า">
+      <div class="cap">ห้องพักจริงที่บ้านพึ่งวัด</div>
+    </div>
+    <div>
+      <img src="img/bedroom-mat.jpg" width="900" height="599" loading="lazy" alt="อีกโซนห้องพักของบ้านพึ่งวัด เตียงเรียงแถวพร้อมตู้เก็บของ">
+      <div class="cap">พร้อมรองรับผู้เข้าพัก</div>
+    </div>
+  </div>
 </div></section>
 
 <!-- ขั้นตอน 3 สเต็ป -->
