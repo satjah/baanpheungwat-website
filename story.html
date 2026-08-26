@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <!--
-  MOCKUP — baanpheungwat.org (Phase 0)
-  story.html — เรื่องราวของเรา (หัวใจของเว็บ)
-  Canonical: head/:root/CSS cluster (header,nav,burger,btn,reveal,todo,label,hdiv,footer) + header + footer + script ก๊อปจาก index.html ตาม DESIGN_RULES.md §1
-  🟡 mockup — ยังไม่ launch จริง · ภาพ/คำพูด/ตัวเลขที่ยังไม่มีข้อมูลจริงติด .todo ทั้งหมด — ห้ามแต่งเนื้อหาแทน
+  MOCKUP V2 — baanpheungwat.org (Phase 0, direction v2 "บ้านที่วัดสร้าง")
+  story.html — เรื่องราวของเรา (หน้าเรือธงของเรื่องเล่า)
+  Canonical: head/:root/CSS cluster (header,nav,burger,btn,reveal,todo,label,hdiv,footer,
+  scene/scene-row/frame,scene-dark,scene-bright/photo-band,heart-connector,parallax script)
+  ก๊อปจาก mockup-v2/index.html ตาม DESIGN_RULES.md §1 + DESIGN_DIRECTION_V2.md
+  เนื้อหาทุกตัวอักษรยกมาจาก www/mockup/story.html (v1) — งานนี้เปลี่ยนผิวและจังหวะ ไม่เปลี่ยนเนื้อหา
+  Timeline v1 จัดใหม่เป็นฉากสลับมืด/สว่าง เชื่อมด้วยเส้นหัวใจ scroll-draw
+  ภาพจริงที่มี: buddha-statue.jpg (จุดเริ่มต้น) · temple-aerial.jpg (photo band ก่อนเปิดบ้าน) · opening-day.jpg (page hero)
+  ช่วงที่ v1 ไม่มีภาพจริง (ผ้าป่า/ก่อสร้าง/โรงครัว) ใช้กล่อง .photo-todo (SVG กล้อง + .todo) แทน — ห้ามเอาภาพอื่นมาสวมแทนความหมาย
+  🟡 mockup — ยังไม่ launch จริง · คำพูดคุณอรสาและภาพหลายจุดยังเป็น .todo ตาม v1
 -->
 <html lang="th">
 <head>
@@ -38,7 +44,7 @@
   .en{font-family:'Open Sans',sans-serif}
   h2{font-size:clamp(1.85rem,3.4vw,2.5rem)}
 
-  /* kicker label + หัวใจจิ๋ว bullet */
+  /* kicker label + หัวใจจิ๋ว bullet (canonical) */
   .label{font-family:'Open Sans',sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.08em;
     font-size:13px;color:var(--green-deep);padding-left:22px;background-repeat:no-repeat;background-position:left center;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='14' viewBox='0 0 16 14'%3E%3Cpath d='M7.6 12 C3 9 1 6.2 1 3.6 C1 1.4 3 0.4 5 1.3 C6.4 1.9 7.2 3 7.6 4' fill='none' stroke='%23F88898' stroke-width='1.4' stroke-linecap='round'/%3E%3Cpath d='M8.4 12 C13 9 15 6.2 15 3.6 C15 1.4 13 0.4 11 1.3 C9.6 1.9 8.8 3 8.4 4' fill='none' stroke='%23F88898' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E")}
@@ -46,30 +52,37 @@
 
   .todo{font-family:'Open Sans',sans-serif;font-size:11px;font-weight:700;color:#B4541F;
     background:#FCEEE3;border-radius:4px;padding:1px 7px;vertical-align:middle;white-space:nowrap;letter-spacing:.02em}
+  .on-dark .todo{color:#FCEEE3;background:rgba(255,255,255,.14)}
 
-  /* reveal */
+  /* reveal (canonical) */
   .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:var(--d,0s)}
   .reveal.in{opacity:1;transform:none}
 
-  /* buttons */
+  /* buttons (canonical) */
   .btn{display:inline-block;font-family:'Anuphan',sans-serif;font-weight:600;padding:13px 28px;border-radius:8px;
     font-size:16px;cursor:pointer;transition:.25s;border:2px solid transparent}
   .btn:hover{transform:translateY(-1px)}
   .btn-green{background:var(--green);color:#fff;box-shadow:0 4px 14px -4px rgba(0,112,64,.4)}
   .btn-green:hover{background:var(--green-deep)}
-  .btn-white{background:#fff;color:var(--green)}
-  .btn-white:hover{background:var(--green-soft)}
   .btn-outline{border-color:var(--green);color:var(--green);background:transparent}
   .btn-outline:hover{background:rgba(0,112,64,.08)}
-  .btn-outline-white{border-color:#fff;color:#fff;background:transparent}
-  .btn-outline-white:hover{background:rgba(255,255,255,.14)}
 
-  /* heart-line divider */
+  /* heart-line divider (canonical) */
   .hdiv{display:flex;align-items:center;gap:14px;max-width:340px;margin:0 auto}
   .hdiv .ln{flex:1;height:1px;background:var(--hairline)}
   .hdiv svg{width:22px;height:19px;flex-shrink:0}
 
-  /* header */
+  /* เส้นหัวใจ scroll-draw เชื่อมระหว่างฉาก (canonical) */
+  .heart-connector{display:flex;justify-content:center;padding:0;position:relative;z-index:3;height:0}
+  .heart-connector svg{width:46px;height:38px;overflow:visible;transform:translateY(-19px);filter:drop-shadow(0 2px 6px rgba(0,0,0,.18))}
+  .heart-connector path{fill:none;stroke:var(--pink);stroke-width:5;stroke-linecap:round;
+    stroke-dasharray:230;stroke-dashoffset:230;transition:stroke-dashoffset 1.1s var(--ease)}
+  .heart-connector.drawn path{stroke-dashoffset:0}
+  .heart-connector.drawn path:nth-child(2){transition-delay:.12s}
+  .hc-chip{position:absolute;inset:0;border-radius:50%;background:var(--paper);width:46px;height:46px;margin:auto;z-index:-1}
+  .heart-connector.on-photo .hc-chip{background:#fff}
+
+  /* header (canonical) */
   header{position:sticky;top:0;z-index:50;background:#fff;box-shadow:0 1px 6px rgba(0,83,47,.06);transition:box-shadow .3s}
   header.scrolled{box-shadow:0 4px 18px rgba(0,83,47,.13)}
   .nav{display:flex;align-items:center;gap:24px;padding:10px 24px;max-width:var(--maxw);margin:0 auto}
@@ -78,12 +91,81 @@
   nav.menu{display:flex;align-items:center;gap:22px}
   nav.menu a{font-family:'Anuphan';font-weight:600;font-size:15px;color:var(--ink)}
   nav.menu a:hover{color:var(--green)}
+  nav.menu a[aria-current="page"]{color:var(--green)}
   .burger{display:none;width:42px;height:36px;position:relative;cursor:pointer;flex:none}
   .burger i{position:absolute;left:9px;right:9px;height:2.5px;border-radius:2px;background:var(--green-deep)}
   .burger i:nth-child(1){top:10px}.burger i:nth-child(2){top:17px}.burger i:nth-child(3){top:24px}
   #mtoggle{display:none}
 
-  /* footer */
+  /* ===== PAGE HERO — ภาพเต็มจอ scrim ล่าง ชื่อหน้าชิดล่างซ้าย ===== */
+  .page-hero-photo{position:relative;min-height:56vh;display:flex;align-items:flex-end;overflow:hidden;color:#fff}
+  .ph-media{position:absolute;inset:0;overflow:hidden}
+  .ph-media img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.08)}
+  .ph-scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,20,12,0) 0%,rgba(0,20,12,0) 28%,rgba(0,20,12,.45) 62%,rgba(0,20,12,.84) 100%)}
+  .ph-content{position:relative;z-index:2;padding:120px 0 48px;text-align:left}
+  .ph-content .label{color:#EAF4EE;margin-bottom:8px}
+  .ph-content h1{color:#fff;font-weight:600;font-size:clamp(1.9rem,4.6vw,3.1rem);line-height:1.28;margin:0 0 14px;max-width:760px;text-shadow:0 1px 20px rgba(0,20,12,.35)}
+  .ph-content .sub{font-family:'Sarabun';font-weight:500;color:rgba(255,255,255,.9);font-size:clamp(1rem,1.6vw,1.15rem);max-width:580px}
+
+  /* ===== บทนำ (paper เรียบ) ===== */
+  .intro{background:var(--paper)}
+  .intro .wrap{max-width:760px}
+  .intro p{margin-bottom:18px}
+  .intro p:last-child{margin-bottom:0}
+
+  /* ===== scene ทั่วไป (canonical) ===== */
+  .scene{position:relative;overflow:hidden}
+  .scene-row{display:grid;grid-template-columns:5fr 7fr;gap:56px;align-items:center}
+  .scene-row.img-right{grid-template-columns:7fr 5fr}
+  .scene-row .col-text,.scene-row .col-photo{min-width:0}
+  .frame{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:4/5}
+  .frame img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.15)}
+
+  /* ===== ฉากมืด (canonical) ===== */
+  .scene-dark{background:var(--green-deep);color:rgba(255,255,255,.92)}
+  .scene-dark h2{color:#fff}
+  .scene-dark p{color:rgba(255,255,255,.82)}
+  .scene-dark .frame{box-shadow:0 30px 60px -24px rgba(0,0,0,.5)}
+
+  /* ===== ฉากสว่าง (paper/ขาว) ===== */
+  .scene-light{background:#fff}
+
+  /* กล่องรอภาพจริง — ทรงเดียวกับ .frame แต่เส้นประ + SVG กล้อง (แทน emoji เดิมของ v1 ตามกฎ §0) */
+  .photo-todo{position:relative;aspect-ratio:4/5;border-radius:12px;border:1.5px dashed var(--hairline);
+    background:var(--green-soft);display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:12px;text-align:center;padding:24px}
+  .photo-todo svg{width:36px;height:36px;stroke:var(--green);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;opacity:.8}
+  .photo-todo span{font-family:'Open Sans',sans-serif;font-size:13px;font-weight:600;color:var(--ink);opacity:.72;line-height:1.5}
+  .photo-todo .todo{margin-top:2px}
+  .photo-todo.on-dark{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.06)}
+  .photo-todo.on-dark svg{stroke:#fff;opacity:.85}
+  .photo-todo.on-dark span{color:rgba(255,255,255,.85);opacity:1}
+  .photo-todo.on-dark .todo{color:#FCEEE3;background:rgba(255,255,255,.14)}
+
+  /* ===== photo band full-bleed (canonical) ===== */
+  .scene-band{background:#fff;padding:0}
+  .photo-band{position:relative;min-height:60vh;overflow:hidden;display:flex;align-items:flex-end}
+  .photo-band img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.12)}
+  .photo-band::after{content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(0,30,17,0) 45%,rgba(0,30,17,.68) 100%)}
+  .photo-band-text{position:relative;z-index:2;color:#fff;padding:0 24px clamp(36px,6vw,64px)}
+  .photo-band-text .wrap{padding:0}
+  .photo-band-text p{color:rgba(255,255,255,.88);max-width:620px;margin-top:10px;font-size:16px}
+
+  /* ===== คำจากผู้ริเริ่ม ===== */
+  .quote-sec{background:var(--pink-soft);text-align:center}
+  .quote-sec .wrap{max-width:720px}
+  .quote-box{background:#fff;border:1px solid var(--hairline);border-radius:14px;padding:48px 36px;margin-top:28px}
+  .quote-box svg{width:32px;height:24px;margin:0 auto 16px;display:block}
+  .quote-box .quote-empty{color:var(--ink);opacity:.55;font-style:italic;font-size:17px;line-height:1.8;text-align:center}
+  .quote-box .who{margin-top:20px;font-family:'Anuphan';font-weight:600;color:var(--green-deep);font-size:15px}
+  .quote-box .todo{display:inline-block;margin-top:14px}
+
+  /* ===== CTA คู่ ===== */
+  .cta-sec{background:var(--green-soft);text-align:center}
+  .cta-sec .row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:26px}
+
+  /* ===== footer (canonical) ===== */
   footer{background:var(--green-deep);color:rgba(255,255,255,.88);font-size:15px}
   footer .cols{display:grid;grid-template-columns:1.3fr 1fr 1.1fr 1fr;gap:32px;padding:56px 24px 30px;max-width:var(--maxw);margin:0 auto}
   footer h4{color:#fff;font-family:'Anuphan';font-weight:600;font-size:16px;margin-bottom:14px}
@@ -97,55 +179,14 @@
     text-align:center;font-size:13px;color:rgba(255,255,255,.6)}
   footer .bottom .h-en{font-style:italic;display:block;margin:8px 0}
 
-  /* PAGE-TOP pattern */
-  .page-hero{background:linear-gradient(160deg,var(--green-deep),#003D22);color:#fff;padding:110px 0 58px;text-align:center}
-  .page-hero .label{color:rgba(255,255,255,.75)}
-  .page-hero h1{color:#fff;font-size:clamp(1.9rem,3.6vw,2.7rem);margin-top:10px}
-  .page-hero .sub{color:rgba(255,255,255,.85);font-size:clamp(1rem,1.5vw,1.1rem);margin-top:10px;max-width:640px;margin-inline:auto}
-
-  /* บทนำ */
-  .intro{background:var(--paper)}
-  .intro .wrap{max-width:760px}
-  .intro p{margin-bottom:18px}
-  .intro p:last-child{margin-bottom:0}
-
-  /* timeline */
-  .tl-section{background:#fff}
-  .timeline{position:relative;margin-top:56px}
-  .timeline::before{content:"";position:absolute;top:6px;bottom:6px;left:50%;width:2px;background:var(--hairline);transform:translateX(-50%)}
-  .tl-item{position:relative;display:flex;align-items:center;gap:40px;margin-bottom:64px;min-width:0}
-  .tl-item:last-child{margin-bottom:0}
-  .tl-item:nth-child(even){flex-direction:row-reverse}
-  .tl-media,.tl-card{flex:1;min-width:0}
-  .tl-dot{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:20px;height:20px;border-radius:50%;
-    background:var(--green);border:4px solid var(--paper);box-shadow:0 0 0 2px var(--hairline);z-index:2;flex:none}
-  .tl-media{aspect-ratio:4/3;border-radius:10px;background:linear-gradient(135deg,var(--green-deep),var(--green));
-    display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;text-align:center;
-    font-family:'Open Sans';font-size:13px;font-weight:600;padding:18px;gap:8px;overflow:hidden}
-  .tl-media .icon{font-size:24px;opacity:.8}
-  .tl-media img{width:100%;height:100%;object-fit:cover;display:block}
-  .tl-card{background:#fff;border:1px solid var(--hairline);border-radius:10px;padding:26px 28px}
-  .tl-card .tl-label{font-family:'Open Sans';font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--pink);margin-bottom:8px}
-  .tl-card h3{font-size:19px;margin-bottom:8px}
-  .tl-card p{font-size:16px;margin-bottom:8px}
-  .tl-card p:last-child{margin-bottom:0}
-
-  /* คำจากผู้ริเริ่ม */
-  .quote-sec{background:var(--pink-soft);text-align:center}
-  .quote-sec .wrap{max-width:720px}
-  .quote-box{background:#fff;border:1px solid var(--hairline);border-radius:14px;padding:48px 36px;margin-top:28px}
-  .quote-box svg{width:32px;height:24px;margin:0 auto 16px;display:block}
-  .quote-box .quote-empty{color:var(--ink);opacity:.55;font-style:italic;font-size:17px;line-height:1.8;text-align:center}
-  .quote-box .who{margin-top:20px;font-family:'Anuphan';font-weight:600;color:var(--green-deep);font-size:15px}
-  .quote-box .todo{display:inline-block;margin-top:14px}
-
-  /* CTA คู่ */
-  .cta-sec{background:var(--green-soft);text-align:center}
-  .cta-sec .row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:26px}
-
   @media(max-width:768px){
+    .page-hero-photo{min-height:44vh}
+    .ph-content{padding:96px 0 40px}
     section{padding:56px 0}
-    .page-hero{padding:88px 0 46px}
+    .scene-row,.scene-row.img-right{grid-template-columns:1fr;gap:30px}
+    .scene-row .col-photo{order:-1}
+    .frame,.photo-todo{aspect-ratio:16/10}
+    .photo-band{min-height:46vh}
     footer .cols{grid-template-columns:1fr 1fr}
     nav.menu{display:none;position:absolute;top:64px;left:0;right:0;background:#fff;flex-direction:column;gap:0;
       padding:8px 0;box-shadow:0 8px 16px rgba(0,0,0,.12)}
@@ -154,21 +195,18 @@
     #mtoggle:checked ~ nav.menu{display:flex}
     .burger{display:block}
     .todo{white-space:normal}
-
-    .timeline::before{left:22px}
-    .tl-item,.tl-item:nth-child(even){flex-direction:column;align-items:flex-start;gap:16px;padding-left:56px}
-    .tl-dot{left:22px;top:6px;transform:translate(-50%,0)}
-    .tl-media{order:-1;max-width:280px}
   }
   @media (prefers-reduced-motion:reduce){
     *{animation:none!important}
     .reveal{opacity:1!important;transform:none!important;transition:none!important}
+    .heart-connector path{stroke-dashoffset:0;transition:none!important}
+    .ph-media img,.frame img,.photo-band img{transform:none!important}
   }
 </style>
 </head>
 <body>
 
-<!-- HEADER (canonical) -->
+<!-- HEADER (canonical จาก mockup-v2/index.html — แก้แค่ aria-current) -->
 <header>
   <div class="nav">
     <input type="checkbox" id="mtoggle">
@@ -176,7 +214,7 @@
     <label for="mtoggle" class="burger" aria-label="เปิดเมนู"><i></i><i></i><i></i></label>
     <nav class="menu">
       <a href="index.html">หน้าแรก</a>
-      <a href="story.html" aria-current="page" style="color:var(--green)">เรื่องราวของเรา</a>
+      <a href="story.html" aria-current="page">เรื่องราวของเรา</a>
       <a href="stay.html">ขอเข้าพัก</a>
       <a href="donate.html">ร่วมบริจาค</a>
       <a href="supporters.html">ผู้สนับสนุน</a>
@@ -186,14 +224,18 @@
   </div>
 </header>
 
-<!-- PAGE HERO -->
-<div class="page-hero">
-  <div class="wrap">
-    <div class="label" style="display:inline-block">เรื่องราวของเรา</div>
-    <h1>จากปณิธานหนึ่ง สู่บ้านของคนแปลกหน้าที่ไม่แปลกหน้าอีกต่อไป</h1>
-    <p class="sub">เส้นทางจากศรัทธาหนึ่งดวง สู่อาคาร 100 เตียงข้างวัดเขารังสามัคคีธรรม</p>
+<!-- PAGE HERO — ภาพวันเปิดบ้าน scrim ล่าง ชื่อหน้าชิดล่างซ้าย -->
+<section class="page-hero-photo">
+  <div class="ph-media">
+    <img src="img/opening-day.jpg" alt="บรรยากาศวันเปิดบ้านพึ่งวัด อาคารสามชั้นหลังคาแดงพร้อมผู้มาร่วมงาน" loading="eager" fetchpriority="high">
   </div>
-</div>
+  <div class="ph-scrim"></div>
+  <div class="ph-content wrap">
+    <div class="label">เรื่องราวของเรา</div>
+    <h1>จาก<span style="white-space:nowrap">ปณิธานหนึ่ง</span> สู่บ้านของ<span style="white-space:nowrap">คนแปลกหน้า</span>ที่ไม่<span style="white-space:nowrap">แปลกหน้า</span><span style="white-space:nowrap">อีกต่อไป</span></h1>
+    <p class="sub">เส้นทางจากศรัทธาหนึ่งดวง สู่อาคาร <span style="white-space:nowrap">100 เตียง</span>ข้าง<span style="white-space:nowrap">วัดเขารังสามัคคีธรรม</span></p>
+  </div>
+</section>
 
 <!-- บทนำ -->
 <section class="intro"><div class="wrap reveal">
@@ -201,68 +243,100 @@
   <p>บ้านพึ่งวัดเกิดขึ้นเพื่อไม่ให้ใครต้องเลือก — เพื่อให้ทุกครอบครัวมีที่พักพิงที่ปลอดภัยและอบอุ่นอยู่ใกล้โรงพยาบาล โดยไม่ต้องกังวลเรื่องค่าใช้จ่ายระหว่างช่วงเวลาที่ยากที่สุดช่วงหนึ่งของชีวิต</p>
 </div></section>
 
-<!-- TIMELINE -->
-<section class="tl-section"><div class="wrap">
-  <div class="reveal" style="text-align:center">
-    <div class="label" style="display:inline-block">เส้นทางของเรา</div>
-    <h2 style="margin-top:10px">จากจุดเริ่มต้น สู่บ้านหลังนี้</h2>
+<!-- เส้นหัวใจเชื่อม 1: บทนำ → จุดเริ่มต้น -->
+<div class="heart-connector" id="hc1"><span class="hc-chip"></span><svg viewBox="0 0 120 100" aria-hidden="true"><path d="M58,80 C35,64 12,48 12,26 C12,10 28,2 44,8 C52,11 57,18 60,26"/><path d="M62,80 C85,64 108,48 108,26 C108,10 92,2 76,8 C68,11 63,18 60,26"/></svg></div>
+
+<!-- ฉากมืด: จุดเริ่มต้น — ปณิธานของคุณอรสา โตสว่าง (ภาพจริง: buddha-statue.jpg) -->
+<section class="scene scene-dark"><div class="wrap">
+  <div class="scene-row">
+    <div class="col-text reveal" style="--d:0s">
+      <div class="label on-dark">จุดเริ่มต้น</div>
+      <h2 style="margin-top:8px">ปณิธานของ<span style="white-space:nowrap">คุณอรสา โตสว่าง</span></h2>
+      <p>จุดเริ่มต้นของบ้านพึ่งวัด มาจากปณิธานของคุณอรสา โตสว่าง ที่อยากเห็นผู้ป่วยที่ขาดแคลนทุนทรัพย์มีที่พักพิงระหว่างการรักษาตัว</p>
+      <span class="todo">.todo รอเรื่องเต็มจากคุณอรสา</span>
+    </div>
+    <div class="col-photo reveal" style="--d:.12s">
+      <div class="frame parallax" data-speed="0.08">
+        <img src="img/buddha-statue.jpg" loading="lazy" alt="พระพุทธรูปประจำวัดเขารังสามัคคีธรรม จุดเริ่มต้นของบ้านพึ่งวัด">
+      </div>
+    </div>
   </div>
+</div></section>
 
-  <div class="timeline">
+<!-- เส้นหัวใจเชื่อม 2: จุดเริ่มต้น → ชุมชนร่วมแรง -->
+<div class="heart-connector" id="hc2"><span class="hc-chip"></span><svg viewBox="0 0 120 100" aria-hidden="true"><path d="M58,80 C35,64 12,48 12,26 C12,10 28,2 44,8 C52,11 57,18 60,26"/><path d="M62,80 C85,64 108,48 108,26 C108,10 92,2 76,8 C68,11 63,18 60,26"/></svg></div>
 
-    <div class="tl-item reveal">
-      <div class="tl-dot"></div>
-      <div class="tl-media"><img src="img/buddha-statue.jpg" width="675" height="900" loading="lazy" alt="พระพุทธรูปประจำวัดเขารังสามัคคีธรรม จุดเริ่มต้นของบ้านพึ่งวัด"></div>
-      <div class="tl-card">
-        <div class="tl-label">จุดเริ่มต้น</div>
-        <h3>ปณิธานของคุณอรสา โตสว่าง</h3>
-        <p>จุดเริ่มต้นของบ้านพึ่งวัด มาจากปณิธานของคุณอรสา โตสว่าง ที่อยากเห็นผู้ป่วยที่ขาดแคลนทุนทรัพย์มีที่พักพิงระหว่างการรักษาตัว</p>
-        <span class="todo">.todo รอเรื่องเต็มจากคุณอรสา</span>
+<!-- ฉากสว่าง: ชุมชนร่วมแรง — ทอดผ้าป่าสามัคคี (ยังไม่มีภาพจริง) -->
+<section class="scene scene-light"><div class="wrap">
+  <div class="scene-row img-right">
+    <div class="col-photo reveal" style="--d:0s">
+      <div class="photo-todo">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l1.6-2.4h6.8L17 8h3a1.5 1.5 0 0 1 1.5 1.5V18A1.5 1.5 0 0 1 20 19.5H4A1.5 1.5 0 0 1 2.5 18V9.5A1.5 1.5 0 0 1 4 8z"/><circle cx="12" cy="13.5" r="3.6"/></svg>
+        <span>ภาพงานผ้าป่า</span>
+        <span class="todo">.todo รอภาพจริง</span>
       </div>
     </div>
+    <div class="col-text reveal" style="--d:.12s">
+      <div class="label">ชุมชนร่วมแรง</div>
+      <h2 style="margin-top:8px">ทอด<span style="white-space:nowrap">ผ้าป่าสามัคคี</span></h2>
+      <p>ปณิธานหนึ่งดวงขยายสู่แรงร่วมมือของชุมชนภูเก็ต ผ่านการทอดผ้าป่าสามัคคี ณ วัดเขารังสามัคคีธรรม</p>
+      <span class="todo">.todo รอยอด/จำนวนผู้ร่วมงานจริง</span>
+    </div>
+  </div>
+</div></section>
 
-    <div class="tl-item reveal">
-      <div class="tl-dot"></div>
-      <div class="tl-media"><div class="icon">📷</div><span>ภาพงานผ้าป่า<br><span class="todo">.todo รอภาพจริง</span></span></div>
-      <div class="tl-card">
-        <div class="tl-label">ชุมชนร่วมแรง</div>
-        <h3>ทอดผ้าป่าสามัคคี</h3>
-        <p>ปณิธานหนึ่งดวงขยายสู่แรงร่วมมือของชุมชนภูเก็ต ผ่านการทอดผ้าป่าสามัคคี ณ วัดเขารังสามัคคีธรรม</p>
-        <span class="todo">.todo รอยอด/จำนวนผู้ร่วมงานจริง</span>
+<!-- ฉากมืด: ลงมือสร้าง — อาคาร 3 ชั้นข้างวัด (ยังไม่มีภาพจริง) -->
+<section class="scene scene-dark"><div class="wrap">
+  <div class="scene-row img-right">
+    <div class="col-photo reveal" style="--d:0s">
+      <div class="photo-todo on-dark">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l1.6-2.4h6.8L17 8h3a1.5 1.5 0 0 1 1.5 1.5V18A1.5 1.5 0 0 1 20 19.5H4A1.5 1.5 0 0 1 2.5 18V9.5A1.5 1.5 0 0 1 4 8z"/><circle cx="12" cy="13.5" r="3.6"/></svg>
+        <span>ภาพระหว่างก่อสร้าง</span>
+        <span class="todo">.todo รอภาพจริง</span>
       </div>
     </div>
+    <div class="col-text reveal" style="--d:.12s">
+      <div class="label on-dark">ลงมือสร้าง</div>
+      <h2 style="margin-top:8px">อาคาร <span style="white-space:nowrap">3 ชั้น</span>ข้างวัด</h2>
+      <p>จากแรงศรัทธาที่รวมกัน อาคาร 3 ชั้นข้างวัดเขารังสามัคคีธรรมค่อยๆ ก่อร่างขึ้นทีละขั้น จนแล้วเสร็จเป็นบ้าน 100 เตียง</p>
+      <span class="todo">.todo รอช่วงเวลาก่อสร้างจริง</span>
+    </div>
+  </div>
+</div></section>
 
-    <div class="tl-item reveal">
-      <div class="tl-dot"></div>
-      <div class="tl-media"><div class="icon">📷</div><span>ภาพระหว่างก่อสร้าง<br><span class="todo">.todo รอภาพจริง</span></span></div>
-      <div class="tl-card">
-        <div class="tl-label">ลงมือสร้าง</div>
-        <h3>อาคาร 3 ชั้นข้างวัด</h3>
-        <p>จากแรงศรัทธาที่รวมกัน อาคาร 3 ชั้นข้างวัดเขารังสามัคคีธรรมค่อยๆ ก่อร่างขึ้นทีละขั้น จนแล้วเสร็จเป็นบ้าน 100 เตียง</p>
-        <span class="todo">.todo รอช่วงเวลาก่อสร้างจริง</span>
+<!-- เส้นหัวใจเชื่อม 3: ลงมือสร้าง → เปิดบ้าน -->
+<div class="heart-connector on-photo" id="hc3"><span class="hc-chip"></span><svg viewBox="0 0 120 100" aria-hidden="true"><path d="M58,80 C35,64 12,48 12,26 C12,10 28,2 44,8 C52,11 57,18 60,26"/><path d="M62,80 C85,64 108,48 108,26 C108,10 92,2 76,8 C68,11 63,18 60,26"/></svg></div>
+
+<!-- photo band full-bleed: เปิดบ้าน สิงหาคม 2569 (ภาพจริง: temple-aerial.jpg) -->
+<section class="scene scene-band">
+  <div class="photo-band parallax" data-speed="0.1">
+    <img src="img/temple-aerial.jpg" loading="lazy" alt="ภาพมุมสูงจากโดรน มองเห็นวัดเขารังสามัคคีธรรมและพื้นที่โดยรอบ">
+    <div class="photo-band-text"><div class="wrap reveal">
+      <div class="label" style="color:#EAF4EE">เปิดบ้าน</div>
+      <h2 style="color:#fff;margin-top:8px"><span style="white-space:nowrap">สิงหาคม 2569</span></h2>
+      <p>อาคาร 100 เตียงพร้อมเปิดรับผู้ป่วยและครอบครัวชุดแรก เริ่มต้นภารกิจของบ้านพึ่งวัดอย่างเป็นทางการ</p>
+    </div></div>
+  </div>
+</section>
+
+<!-- เส้นหัวใจเชื่อม 4: เปิดบ้าน → ก้าวต่อไป -->
+<div class="heart-connector" id="hc4"><span class="hc-chip"></span><svg viewBox="0 0 120 100" aria-hidden="true"><path d="M58,80 C35,64 12,48 12,26 C12,10 28,2 44,8 C52,11 57,18 60,26"/><path d="M62,80 C85,64 108,48 108,26 C108,10 92,2 76,8 C68,11 63,18 60,26"/></svg></div>
+
+<!-- ฉากสว่าง: ก้าวต่อไป — โรงครัวสำหรับผู้เข้าพัก (ยังไม่มีภาพจริง) -->
+<section class="scene scene-light"><div class="wrap">
+  <div class="scene-row">
+    <div class="col-text reveal" style="--d:0s">
+      <div class="label">ก้าวต่อไป</div>
+      <h2 style="margin-top:8px">โรงครัวสำหรับ<span style="white-space:nowrap">ผู้เข้าพัก</span></h2>
+      <p>เฟสถัดไปของบ้านพึ่งวัด คือโรงครัวสำหรับผู้เข้าพัก เพื่อให้การดูแลผู้ป่วยและครอบครัวครบวงจรยิ่งขึ้น</p>
+    </div>
+    <div class="col-photo reveal" style="--d:.12s">
+      <div class="photo-todo">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l1.6-2.4h6.8L17 8h3a1.5 1.5 0 0 1 1.5 1.5V18A1.5 1.5 0 0 1 20 19.5H4A1.5 1.5 0 0 1 2.5 18V9.5A1.5 1.5 0 0 1 4 8z"/><circle cx="12" cy="13.5" r="3.6"/></svg>
+        <span>ภาพพื้นที่โรงครัวในอนาคต</span>
+        <span class="todo">.todo รอภาพจริง</span>
       </div>
     </div>
-
-    <div class="tl-item reveal">
-      <div class="tl-dot"></div>
-      <div class="tl-media"><img src="img/opening-day.jpg" width="900" height="600" loading="lazy" alt="บรรยากาศวันเปิดบ้านพึ่งวัด อาคารสามชั้นหลังคาแดงพร้อมผู้มาร่วมงาน"></div>
-      <div class="tl-card">
-        <div class="tl-label">เปิดบ้าน</div>
-        <h3>สิงหาคม 2569</h3>
-        <p>อาคาร 100 เตียงพร้อมเปิดรับผู้ป่วยและครอบครัวชุดแรก เริ่มต้นภารกิจของบ้านพึ่งวัดอย่างเป็นทางการ</p>
-      </div>
-    </div>
-
-    <div class="tl-item reveal">
-      <div class="tl-dot"></div>
-      <div class="tl-media"><div class="icon">📷</div><span>ภาพพื้นที่โรงครัวในอนาคต<br><span class="todo">.todo รอภาพจริง</span></span></div>
-      <div class="tl-card">
-        <div class="tl-label">ก้าวต่อไป</div>
-        <h3>โรงครัวสำหรับผู้เข้าพัก</h3>
-        <p>เฟสถัดไปของบ้านพึ่งวัด คือโรงครัวสำหรับผู้เข้าพัก เพื่อให้การดูแลผู้ป่วยและครอบครัวครบวงจรยิ่งขึ้น</p>
-      </div>
-    </div>
-
   </div>
 </div></section>
 
@@ -286,7 +360,7 @@
   </div>
 </div></section>
 
-<!-- hairline+heart divider -->
+<!-- hairline+heart divider ก่อน footer -->
 <div class="wrap"><div class="hdiv" style="margin-bottom:0">
   <div class="ln"></div>
   <svg viewBox="0 0 120 100" aria-hidden="true"><path d="M58,80 C35,64 12,48 12,26 C12,10 28,2 44,8 C52,11 57,18 60,26" fill="none" stroke="var(--pink)" stroke-width="6" stroke-linecap="round"/><path d="M62,80 C85,64 108,48 108,26 C108,10 92,2 76,8 C68,11 63,18 60,26" fill="none" stroke="var(--pink)" stroke-width="6" stroke-linecap="round"/></svg>
@@ -331,6 +405,37 @@ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
 
 // header shadow on scroll
 var hd=document.querySelector('header');addEventListener('scroll',function(){hd.classList.toggle('scrolled',scrollY>4)},{passive:true});
+
+var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// เส้นหัวใจ scroll-draw — วาดตัวเองเมื่อเลื่อนถึงจุดเชื่อมระหว่างฉาก (ครั้งเดียวแล้ว unobserve)
+if(!reduce){
+  var io3=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('drawn');io3.unobserve(e.target)}})},{threshold:.6});
+  document.querySelectorAll('.heart-connector').forEach(function(el){io3.observe(el)});
+}else{
+  document.querySelectorAll('.heart-connector').forEach(function(el){el.classList.add('drawn')});
+}
+
+// parallax เบา — transform-based เท่านั้น (ห้าม background-attachment:fixed) ปิดสนิทถ้า reduced-motion
+if(!reduce){
+  var pxList=Array.prototype.slice.call(document.querySelectorAll('.parallax'));
+  var ticking=false;
+  function updateParallax(){
+    var vh=innerHeight;
+    pxList.forEach(function(box){
+      var img=box.querySelector('img')||box;
+      var rect=box.getBoundingClientRect();
+      var speed=parseFloat(box.dataset.speed||0.1);
+      var center=(rect.top+rect.height/2)-vh/2;
+      var shift=Math.max(-60,Math.min(60,center*-speed));
+      img.style.transform='translateY('+shift.toFixed(1)+'px) scale(1.15)';
+    });
+    ticking=false;
+  }
+  addEventListener('scroll',function(){if(!ticking){requestAnimationFrame(updateParallax);ticking=true}},{passive:true});
+  addEventListener('resize',updateParallax,{passive:true});
+  updateParallax();
+}
 </script>
 </body>
 </html>

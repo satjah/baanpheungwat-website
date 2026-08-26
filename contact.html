@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <!--
-  MOCKUP — baanpheungwat.org (Phase 0)
+  MOCKUP V2 — baanpheungwat.org (Phase 0, direction v2 "บ้านที่วัดสร้าง")
   บ้านพึ่งวัด ภูเก็ต · หน้า "ติดต่อ"
-  header/nav/footer/CSS cluster ก๊อปจาก mockup/index.html (canonical) ตาม DESIGN_RULES.md §1
+  header/nav/footer/CSS token/scene patterns ก๊อปจาก mockup-v2/index.html (canonical v2) ตาม DESIGN_DIRECTION_V2.md
+  เนื้อหาทุกตัวอักษรยกมาจาก www/mockup/contact.html (v1) — งานนี้เปลี่ยนผิวและจังหวะเท่านั้น ไม่เปลี่ยนเนื้อหา
+  page hero ย่อ (~46vh) + scrim ล่าง + ชื่อหน้าชิดล่างซ้าย → ข้อมูลติดต่อ/แผนที่/จุดสังเกต เป็นฉากสลับสว่าง-อ่อน
+  icon ทุกตัว = inline SVG เท่านั้น (v1 ใช้ emoji/glyph 📞 "f" "▦" — v2 ห้ามเด็ดขาดตาม DESIGN_RULES §0)
+  ไม่มีระบบฟอร์ม backend Phase นี้ — ไม่มีช่องข้อมูลการเงินหรือฟอร์ม submit ใดๆ (กฎ DESIGN_RULES §2, ตรวจซ้ำแล้ว)
   🟡 mockup — ยังไม่ launch จริง · เบอร์โทร/ลิงก์ FB/แผนที่ ยังเป็น placeholder ติด .todo ทั้งหมด
-  ไม่มีระบบฟอร์ม backend Phase นี้ — ไม่มีช่องข้อมูลการเงินหรือฟอร์ม submit ใดๆ (กฎ DESIGN_RULES §2)
 -->
 <html lang="th">
 <head>
@@ -34,7 +37,7 @@
   h1,h2,h3{font-family:'Anuphan',sans-serif;line-height:1.3;color:var(--green-deep);text-wrap:balance}
   p{text-wrap:pretty}
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
-  section{padding:clamp(72px,10vw,120px) 0}
+  section{padding:clamp(64px,9vw,104px) 0}
   a{color:var(--green);text-decoration:none}
   .en{font-family:'Open Sans',sans-serif}
   h2{font-size:clamp(1.85rem,3.4vw,2.5rem)}
@@ -47,6 +50,7 @@
 
   .todo{font-family:'Open Sans',sans-serif;font-size:11px;font-weight:700;color:#B4541F;
     background:#FCEEE3;border-radius:4px;padding:1px 7px;vertical-align:middle;white-space:nowrap;letter-spacing:.02em}
+  .on-dark .todo{color:#FCEEE3;background:rgba(255,255,255,.14)}
 
   /* reveal */
   .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:var(--d,0s)}
@@ -65,12 +69,22 @@
   .btn-outline-white{border-color:#fff;color:#fff;background:transparent}
   .btn-outline-white:hover{background:rgba(255,255,255,.14)}
 
-  /* heart-line divider */
+  /* heart-line divider (signature — ทรงเดียวกับ v1/index-v2 ห้ามวาดใหม่) */
   .hdiv{display:flex;align-items:center;gap:14px;max-width:340px;margin:0 auto}
   .hdiv .ln{flex:1;height:1px;background:var(--hairline)}
   .hdiv svg{width:22px;height:19px;flex-shrink:0}
 
-  /* header */
+  /* เส้นหัวใจ scroll-draw ที่เชื่อมระหว่างฉาก */
+  .heart-connector{display:flex;justify-content:center;padding:0;position:relative;z-index:3;height:0}
+  .heart-connector svg{width:46px;height:38px;overflow:visible;transform:translateY(-19px);filter:drop-shadow(0 2px 6px rgba(0,0,0,.18))}
+  .heart-connector path{fill:none;stroke:var(--pink);stroke-width:5;stroke-linecap:round;
+    stroke-dasharray:230;stroke-dashoffset:230;transition:stroke-dashoffset 1.1s var(--ease)}
+  .heart-connector.drawn path{stroke-dashoffset:0}
+  .heart-connector.drawn path:nth-child(2){transition-delay:.12s}
+  .hc-chip{position:absolute;inset:0;border-radius:50%;background:var(--paper);width:46px;height:46px;margin:auto;z-index:-1}
+  .heart-connector.on-photo .hc-chip{background:#fff}
+
+  /* header (canonical — ก๊อปจาก index-v2) */
   header{position:sticky;top:0;z-index:50;background:#fff;box-shadow:0 1px 6px rgba(0,83,47,.06);transition:box-shadow .3s}
   header.scrolled{box-shadow:0 4px 18px rgba(0,83,47,.13)}
   .nav{display:flex;align-items:center;gap:24px;padding:10px 24px;max-width:var(--maxw);margin:0 auto}
@@ -79,16 +93,27 @@
   nav.menu{display:flex;align-items:center;gap:22px}
   nav.menu a{font-family:'Anuphan';font-weight:600;font-size:15px;color:var(--ink)}
   nav.menu a:hover{color:var(--green)}
+  nav.menu a[aria-current="page"]{color:var(--green)}
   .burger{display:none;width:42px;height:36px;position:relative;cursor:pointer;flex:none}
   .burger i{position:absolute;left:9px;right:9px;height:2.5px;border-radius:2px;background:var(--green-deep)}
   .burger i:nth-child(1){top:10px}.burger i:nth-child(2){top:17px}.burger i:nth-child(3){top:24px}
   #mtoggle{display:none}
 
-  /* page hero */
-  .page-hero{background:linear-gradient(160deg,var(--green-deep),#003D22);color:#fff;padding:110px 0 58px;text-align:center}
-  .page-hero .label{color:rgba(255,255,255,.75)}
-  .page-hero h1{color:#fff;font-size:clamp(1.9rem,3.6vw,2.7rem);margin-top:10px}
-  .page-hero .sub{color:rgba(255,255,255,.85);font-size:clamp(1rem,1.5vw,1.1rem);margin-top:10px;max-width:640px;margin-inline:auto}
+  /* ===== PAGE HERO ย่อ (46vh) — เดียวกับ photo-band ของ index-v2 แต่เตี้ยกว่า + ชื่อหน้าชิดล่างซ้าย ===== */
+  .page-hero{position:relative;min-height:46vh;display:flex;align-items:flex-end;overflow:hidden;color:#fff}
+  .page-hero .ph-media{position:absolute;inset:0;overflow:hidden}
+  .page-hero .ph-media img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.08)}
+  .page-hero .ph-scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,20,12,0) 38%,rgba(0,20,12,.55) 74%,rgba(0,20,12,.82) 100%)}
+  .page-hero .ph-content{position:relative;z-index:2;padding:126px 0 40px;text-align:left}
+  .page-hero .ph-content .label{color:#EAF4EE}
+  .page-hero h1{color:#fff;font-size:clamp(1.9rem,4.4vw,3.1rem);margin-top:10px;text-shadow:0 1px 20px rgba(0,20,12,.35)}
+  .page-hero .ph-sub{font-family:'Sarabun';color:rgba(255,255,255,.88);font-size:clamp(1rem,1.6vw,1.15rem);
+    max-width:600px;margin-top:12px}
+
+  /* ===== scene ทั่วไป ===== */
+  .scene{position:relative;overflow:hidden}
+  .scene-soft{background:var(--green-soft)}
+  .scene-white{background:#fff}
 
   /* การ์ดช่องทางติดต่อ */
   .contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:36px}
@@ -96,13 +121,15 @@
   .ccard{border:1px solid var(--hairline);border-radius:10px;background:#fff;padding:30px 26px;text-align:center;
     display:flex;flex-direction:column;align-items:center;gap:10px;height:100%}
   .ccard .mark{width:52px;height:52px;border-radius:50%;background:var(--green-soft);display:flex;align-items:center;
-    justify-content:center;font-size:22px}
+    justify-content:center}
+  .ccard .mark svg{width:24px;height:24px;stroke:var(--green);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .ccard .mark svg.filled{fill:var(--green);stroke:none}
   .ccard h3{font-size:17px;color:var(--green-deep)}
   .ccard p{font-size:15px;color:var(--ink)}
   .ccard .btn{margin-top:6px}
 
   /* กล่องข้อความถึงเรา */
-  .msg-box{background:var(--green-soft);border-radius:10px;padding:34px 32px}
+  .msg-box{background:#fff;border:1px solid var(--hairline);border-radius:10px;padding:34px 32px}
   .msg-box h3{font-size:19px;margin-bottom:10px}
   .msg-box p{font-size:16px}
   .msg-box .row{display:flex;gap:14px;flex-wrap:wrap;margin-top:20px}
@@ -110,14 +137,13 @@
   /* แผนที่ */
   .map-box{aspect-ratio:16/8;border:1.5px dashed var(--hairline);border-radius:10px;background:var(--paper);
     display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:20px}
-  .map-box .icon{font-size:34px;opacity:.6}
+  .map-box svg{width:34px;height:34px;stroke:var(--green);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;opacity:.65}
   .map-box span{font-family:'Open Sans',sans-serif;font-size:13px;font-weight:600;color:var(--ink)}
-  .map-note{font-size:15px;color:var(--ink);margin-top:14px;text-align:center}
 
   /* สื่อ/หน่วยงาน */
   .media-note{border-left:3px solid var(--pink);padding-left:16px;font-size:16px}
 
-  /* footer */
+  /* ===== footer (canonical — ก๊อปจาก index-v2) ===== */
   footer{background:var(--green-deep);color:rgba(255,255,255,.88);font-size:15px}
   footer .cols{display:grid;grid-template-columns:1.3fr 1fr 1.1fr 1fr;gap:32px;padding:56px 24px 30px;max-width:var(--maxw);margin:0 auto}
   footer h4{color:#fff;font-family:'Anuphan';font-weight:600;font-size:16px;margin-bottom:14px}
@@ -132,7 +158,8 @@
   footer .bottom .h-en{font-style:italic;display:block;margin:8px 0}
 
   @media(max-width:768px){
-    section{padding:56px 0}
+    .page-hero{min-height:40vh}
+    section{padding:52px 0}
     .contact-grid{grid-template-columns:1fr}
     .msg-box .row{flex-direction:column;align-items:stretch}
     .msg-box .row .btn{text-align:center}
@@ -145,15 +172,20 @@
     .burger{display:block}
     .todo{white-space:normal}
   }
+  @media(max-width:560px){
+    .page-hero .ph-content{padding-top:100px}
+  }
   @media (prefers-reduced-motion:reduce){
     *{animation:none!important}
     .reveal{opacity:1!important;transform:none!important;transition:none!important}
+    .heart-connector path{stroke-dashoffset:0;transition:none!important}
+    .page-hero .ph-media img{transform:none!important}
   }
 </style>
 </head>
 <body>
 
-<!-- HEADER (canonical จาก index.html) -->
+<!-- HEADER (canonical จาก index-v2 — แก้แค่ aria-current) -->
 <header>
   <div class="nav">
     <input type="checkbox" id="mtoggle">
@@ -165,38 +197,45 @@
       <a href="stay.html">ขอเข้าพัก</a>
       <a href="donate.html">ร่วมบริจาค</a>
       <a href="supporters.html">ผู้สนับสนุน</a>
-      <a href="contact.html" aria-current="page" style="color:var(--green)">ติดต่อ</a>
+      <a href="contact.html" aria-current="page">ติดต่อ</a>
       <a href="donate.html" class="btn btn-green" style="padding:9px 20px;font-size:14px">บริจาค</a>
     </nav>
   </div>
 </header>
 
-<!-- PAGE HERO -->
-<div class="page-hero"><div class="wrap">
-  <div class="label" style="display:inline-block">ติดต่อ</div>
-  <h1>ติดต่อบ้านพึ่งวัด ภูเก็ต</h1>
-  <p class="sub">ทีมงานยินดีตอบทุกคำถาม ทั้งเรื่องการเข้าพัก การบริจาค และการร่วมสนับสนุน</p>
-</div></div>
+<!-- PAGE HERO ย่อ (temple-aerial.jpg) -->
+<section class="page-hero">
+  <div class="ph-media"><img src="img/temple-aerial.jpg" alt="ภาพมุมสูงจากโดรน มองเห็นวัดเขารังสามัคคีธรรมและพื้นที่โดยรอบ" loading="eager" fetchpriority="high"></div>
+  <div class="ph-scrim"></div>
+  <div class="ph-content wrap">
+    <div class="label" style="display:inline-block">ติดต่อ</div>
+    <h1>ติดต่อบ้านพึ่งวัด ภูเก็ต</h1>
+    <p class="ph-sub">ทีมงานยินดีตอบทุกคำถาม ทั้งเรื่องการเข้าพัก การบริจาค และการร่วมสนับสนุน</p>
+  </div>
+</section>
+
+<!-- เส้นหัวใจเชื่อม 1: hero → ช่องทางติดต่อ -->
+<div class="heart-connector" id="hc1"><span class="hc-chip"></span><svg viewBox="0 0 120 100" aria-hidden="true"><path d="M58,80 C35,64 12,48 12,26 C12,10 28,2 44,8 C52,11 57,18 60,26"/><path d="M62,80 C85,64 108,48 108,26 C108,10 92,2 76,8 C68,11 63,18 60,26"/></svg></div>
 
 <!-- การ์ดช่องทางติดต่อ 3 ใบ -->
-<section><div class="wrap">
+<section class="scene-white"><div class="wrap">
   <div class="contact-grid">
     <div class="ccard reveal" style="--d:0s">
-      <div class="mark">📞</div>
+      <div class="mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.5c-2 0-3.5 1.6-3.2 3.5.9 6 5.2 10.3 11.2 11.2 1.9.3 3.5-1.2 3.5-3.2v-1.3c0-.5-.3-.9-.8-1l-3-.8c-.4-.1-.9 0-1.1.4l-.9 1.3c-1.9-1-3.4-2.5-4.4-4.4l1.3-.9c.4-.3.5-.7.4-1.1l-.8-3c-.1-.5-.5-.8-1-.8H7z"/></svg></div>
       <h3>โทรศัพท์</h3>
       <p>โทรสอบถามเรื่องการเข้าพัก การบริจาค หรือข้อสงสัยทั่วไป</p>
       <div class="todo">.todo รอเบอร์จริง</div>
       <a href="tel:#" class="btn btn-outline">โทรหาเรา</a>
     </div>
     <div class="ccard reveal" style="--d:.09s">
-      <div class="mark">f</div>
+      <div class="mark"><svg viewBox="0 0 24 24" aria-hidden="true" class="filled"><path d="M14.5 8.5h-2V7c0-.6.4-1 1-1h1V3.2h-1.6C10.9 3.2 9.5 4.6 9.5 6.6V8.5H8V11h1.5v9.5h3V11h2l.4-2.5z"/></svg></div>
       <h3>Facebook</h3>
       <p>บ้านพึงวัดภูเก็ต โยมเสตย์</p>
       <div class="todo">.todo รอลิงก์เพจทางการ</div>
       <a href="#" class="btn btn-outline">ไปที่เพจ Facebook</a>
     </div>
     <div class="ccard reveal" style="--d:.18s">
-      <div class="mark">▦</div>
+      <div class="mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-7.5-7-12a7 7 0 1 1 14 0c0 4.5-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
       <h3>เดินทางมาหาเรา</h3>
       <p>87/7 ถ.เขารัง ต.รัษฎา<br>อ.เมืองภูเก็ต 83000<br>(ข้างวัดเขารังสามัคคีธรรม)</p>
       <a href="https://maps.google.com/?q=วัดเขารังสามัคคีธรรม+ภูเก็ต" target="_blank" rel="noopener" class="btn btn-outline">เปิดใน Google Maps</a>
@@ -205,7 +244,7 @@
 </div></section>
 
 <!-- กล่องข้อความถึงเรา -->
-<section style="padding-top:0"><div class="wrap">
+<section class="scene scene-soft" style="padding-top:0"><div class="wrap">
   <div class="msg-box reveal">
     <div class="label" style="display:inline-block">ส่งข้อความถึงเรา</div>
     <h3 style="margin-top:10px">ยังไม่มีฟอร์มออนไลน์ในตอนนี้</h3>
@@ -217,14 +256,18 @@
   </div>
 </div></section>
 
+<!-- เส้นหัวใจเชื่อม 2: ข้อความถึงเรา → แผนที่ -->
+<div class="heart-connector" id="hc2"><span class="hc-chip"></span><svg viewBox="0 0 120 100" aria-hidden="true"><path d="M58,80 C35,64 12,48 12,26 C12,10 28,2 44,8 C52,11 57,18 60,26"/><path d="M62,80 C85,64 108,48 108,26 C108,10 92,2 76,8 C68,11 63,18 60,26"/></svg></div>
+
 <!-- แผนที่ -->
-<section style="padding-top:0"><div class="wrap">
+<section class="scene-white"><div class="wrap">
   <div class="reveal">
     <div class="label">แผนที่</div>
     <h2 style="margin-top:10px">แผนที่และจุดสังเกต</h2>
   </div>
   <div class="map-box reveal" style="margin-top:28px">
-    <div class="icon">▦</div><span>แผนที่</span><span class="todo">.todo รอ embed แผนที่</span>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-7.5-7-12a7 7 0 1 1 14 0c0 4.5-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+    <span>แผนที่</span><span class="todo">.todo รอ embed แผนที่</span>
   </div>
   <figure class="reveal" style="margin:26px 0 0">
     <img src="img/temple-aerial.jpg" width="700" height="394" loading="lazy" alt="ภาพมุมสูงเห็นวัดเขารังสามัคคีธรรมและอาคารบ้านพึ่งวัดตั้งอยู่ข้างกัน เชิงเขารัง" style="width:100%;max-width:760px;height:auto;display:block;margin:0 auto;border-radius:10px;border:1px solid var(--hairline)">
@@ -233,11 +276,18 @@
 </div></section>
 
 <!-- สำหรับสื่อ/หน่วยงาน -->
-<section style="padding-top:0"><div class="wrap">
+<section class="scene-white" style="padding-top:0"><div class="wrap">
   <p class="media-note reveal">สำหรับสื่อมวลชนและหน่วยงานที่ต้องการข้อมูลหรือประสานงาน ติดต่อผ่านช่องทางเดียวกันด้านบน ทีมงานจะประสานผู้รับผิดชอบให้</p>
 </div></section>
 
-<!-- FOOTER (canonical จาก index.html) -->
+<!-- hairline+heart divider ก่อน footer -->
+<div class="wrap"><div class="hdiv" style="margin-bottom:0">
+  <div class="ln"></div>
+  <svg viewBox="0 0 120 100" aria-hidden="true"><path d="M58,80 C35,64 12,48 12,26 C12,10 28,2 44,8 C52,11 57,18 60,26" fill="none" stroke="var(--pink)" stroke-width="6" stroke-linecap="round"/><path d="M62,80 C85,64 108,48 108,26 C108,10 92,2 76,8 C68,11 63,18 60,26" fill="none" stroke="var(--pink)" stroke-width="6" stroke-linecap="round"/></svg>
+  <div class="ln"></div>
+</div></div>
+
+<!-- FOOTER (canonical จาก index-v2 — แก้แค่ลิงก์หน้าปัจจุบัน) -->
 <footer>
   <div class="cols">
     <div>
@@ -275,6 +325,15 @@ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
 
 // header shadow on scroll
 var hd=document.querySelector('header');addEventListener('scroll',function(){hd.classList.toggle('scrolled',scrollY>4)},{passive:true});
+
+// เส้นหัวใจ scroll-draw — วาดตัวเองเมื่อเลื่อนถึงจุดเชื่อมระหว่างฉาก (ครั้งเดียวแล้ว unobserve)
+var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(!reduce){
+  var io3=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('drawn');io3.unobserve(e.target)}})},{threshold:.6});
+  document.querySelectorAll('.heart-connector').forEach(function(el){io3.observe(el)});
+}else{
+  document.querySelectorAll('.heart-connector').forEach(function(el){el.classList.add('drawn')});
+}
 </script>
 </body>
 </html>
