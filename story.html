@@ -121,6 +121,11 @@
   .frame{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:4/5}
   .frame img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.15)}
 
+  /* แถบภาพบรรยากาศเล็ก ใต้ frame หลัก (canonical เพิ่ม 21 ก.ย. — งานผ้าป่า) */
+  .mini-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
+  .mini-grid img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;border-radius:8px;min-width:0}
+  @media(max-width:560px){.mini-grid{grid-template-columns:1fr 1fr}}
+
   /* ===== ฉากมืด (canonical) ===== */
   .scene-dark{background:var(--green-deep);color:rgba(255,255,255,.92)}
   .scene-dark h2{color:#fff}
@@ -151,6 +156,14 @@
   .photo-band-text{position:relative;z-index:2;color:#fff;padding:0 24px clamp(36px,6vw,64px)}
   .photo-band-text .wrap{padding:0}
   .photo-band-text p{color:rgba(255,255,255,.88);max-width:620px;margin-top:10px;font-size:16px}
+
+  /* ===== คลิปโดรน อาคารเสร็จ (เพิ่ม 21 ก.ย.) ===== */
+  .video-scene{background:var(--paper);text-align:center}
+  .video-scene .wrap{max-width:480px}
+  .video-frame{position:relative;border-radius:14px;overflow:hidden;aspect-ratio:9/16;
+    box-shadow:0 24px 50px -20px rgba(0,50,25,.32);background:#0c1a12;margin:26px auto 0}
+  .video-frame video{width:100%;height:100%;object-fit:cover;display:block}
+  .video-scene p{margin-top:20px}
 
   /* ===== คำจากผู้ริเริ่ม ===== */
   .quote-sec{background:var(--pink-soft);text-align:center}
@@ -186,6 +199,7 @@
     .scene-row,.scene-row.img-right{grid-template-columns:1fr;gap:30px}
     .scene-row .col-photo{order:-1}
     .frame,.photo-todo{aspect-ratio:16/10}
+    .mini-grid{grid-template-columns:repeat(2,1fr)}
     .photo-band{min-height:46vh}
     footer .cols{grid-template-columns:1fr 1fr}
     nav.menu{display:none;position:absolute;top:64px;left:0;right:0;background:#fff;flex-direction:column;gap:0;
@@ -210,7 +224,7 @@
 <header>
   <div class="nav">
     <input type="checkbox" id="mtoggle">
-    <a href="index.html" class="logo"><img src="logo.jpg" alt="บ้านพึ่งวัด ภูเก็ต — วัดเขารังสามัคคีธรรม" class="logo-img"></a>
+    <a href="index.html" class="logo"><img src="../mockup/logo.jpg" alt="บ้านพึ่งวัด ภูเก็ต — วัดเขารังสามัคคีธรรม" class="logo-img"></a>
     <label for="mtoggle" class="burger" aria-label="เปิดเมนู"><i></i><i></i><i></i></label>
     <nav class="menu">
       <a href="index.html">หน้าแรก</a>
@@ -227,7 +241,7 @@
 <!-- PAGE HERO — ภาพวันเปิดบ้าน scrim ล่าง ชื่อหน้าชิดล่างซ้าย -->
 <section class="page-hero-photo">
   <div class="ph-media">
-    <img src="img/opening-day.jpg" alt="บรรยากาศวันเปิดบ้านพึ่งวัด อาคารสามชั้นหลังคาแดงพร้อมผู้มาร่วมงาน" loading="eager" fetchpriority="high">
+    <img src="../mockup/img/opening-day.jpg" alt="บรรยากาศวันเปิดบ้านพึ่งวัด อาคารสามชั้นหลังคาแดงพร้อมผู้มาร่วมงาน" loading="eager" fetchpriority="high">
   </div>
   <div class="ph-scrim"></div>
   <div class="ph-content wrap">
@@ -257,7 +271,7 @@
     </div>
     <div class="col-photo reveal" style="--d:.12s">
       <div class="frame parallax" data-speed="0.08">
-        <img src="img/buddha-statue.jpg" loading="lazy" alt="พระพุทธรูปประจำวัดเขารังสามัคคีธรรม จุดเริ่มต้นของบ้านพึ่งวัด">
+        <img src="../mockup/img/buddha-statue.jpg" loading="lazy" alt="พระพุทธรูปประจำวัดเขารังสามัคคีธรรม จุดเริ่มต้นของบ้านพึ่งวัด">
       </div>
     </div>
   </div>
@@ -266,20 +280,28 @@
 <!-- เส้นหัวใจเชื่อม 2: จุดเริ่มต้น → ชุมชนร่วมแรง -->
 <div class="heart-connector" id="hc2"><span class="hc-chip"></span><svg viewBox="0 0 120 100" aria-hidden="true"><path d="M58,80 C35,64 12,48 12,26 C12,10 28,2 44,8 C52,11 57,18 60,26"/><path d="M62,80 C85,64 108,48 108,26 C108,10 92,2 76,8 C68,11 63,18 60,26"/></svg></div>
 
-<!-- ฉากสว่าง: ชุมชนร่วมแรง — ทอดผ้าป่าสามัคคี (ยังไม่มีภาพจริง) -->
+<!-- ฉากสว่าง: ชุมชนร่วมแรง — ทอดผ้าป่าสามัคคี (ภาพจริง: งานทอดผ้าป่าช่วยชีวิต 1 มิ.ย. 2569) -->
 <section class="scene scene-light"><div class="wrap">
   <div class="scene-row img-right">
     <div class="col-photo reveal" style="--d:0s">
-      <div class="photo-todo">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l1.6-2.4h6.8L17 8h3a1.5 1.5 0 0 1 1.5 1.5V18A1.5 1.5 0 0 1 20 19.5H4A1.5 1.5 0 0 1 2.5 18V9.5A1.5 1.5 0 0 1 4 8z"/><circle cx="12" cy="13.5" r="3.6"/></svg>
-        <span>ภาพงานผ้าป่า</span>
-        <span class="todo">.todo รอภาพจริง</span>
+      <div class="frame">
+        <img src="img/phapa-main-hall.jpg" loading="lazy" alt="ศาลาวัดเขารังสามัคคีธรรมเต็มไปด้วยผู้มีจิตศรัทธาและแขกผู้มีเกียรติ ร่วมพิธีทอดผ้าป่าช่วยชีวิต โดยมีพระสงฆ์เป็นประธาน">
+      </div>
+      <div class="mini-grid">
+        <img src="img/phapa-amb-procession.jpg" loading="lazy" alt="ขบวนแห่นางรำชุดไทยประเพณีนำขบวนผ้าป่าช่วยชีวิตเข้าสู่วัด">
+        <img src="img/phapa-amb-parade-banner.jpg" loading="lazy" alt="ขบวนแห่ผ้าป่าช่วยชีวิตพร้อมป้ายบ้านพึ่งวัด ภูเก็ต เคลื่อนเข้าสู่วัด">
+        <img src="img/phapa-amb-money-tree.jpg" loading="lazy" alt="ผู้ร่วมงานยิ้มแย้มถือต้นผ้าป่าประดับธนบัตรและดอกไม้">
+        <img src="img/phapa-amb-family.jpg" loading="lazy" alt="ครอบครัวผู้มีจิตศรัทธาถือต้นผ้าป่าร่วมขบวน">
+        <img src="img/phapa-amb-community.jpg" loading="lazy" alt="ผู้มีจิตศรัทธาถือต้นผ้าป่าประดับธนบัตรและดอกไม้ ร่วมสมทบทุน">
+        <img src="img/phapa-amb-monks-chant.jpg" loading="lazy" alt="พระสงฆ์วัดเขารังสามัคคีธรรมนั่งเรียงแถวสวดมนต์ในพิธีทอดผ้าป่า">
+        <img src="img/phapa-amb-monks-portrait.jpg" loading="lazy" alt="พระเถระนั่งเป็นประธานสงฆ์ในพิธีทอดผ้าป่าช่วยชีวิต">
+        <img src="img/phapa-amb-moment.jpg" loading="lazy" alt="ผู้ร่วมงานซาบซึ้งใจหลังป้ายบ้านพึ่งวัดในพิธีทอดผ้าป่า">
       </div>
     </div>
     <div class="col-text reveal" style="--d:.12s">
       <div class="label">ชุมชนร่วมแรง</div>
       <h2 style="margin-top:8px">ทอด<span style="white-space:nowrap">ผ้าป่าสามัคคี</span></h2>
-      <p>ปณิธานหนึ่งดวงขยายสู่แรงร่วมมือของชุมชนภูเก็ต ผ่านการทอดผ้าป่าสามัคคี ณ วัดเขารังสามัคคีธรรม</p>
+      <p>ปณิธานหนึ่งดวงขยายสู่แรงร่วมมือของชุมชนภูเก็ต ผ่านการทอดผ้าป่าสามัคคี "ผ้าป่าช่วยชีวิต" ณ วัดเขารังสามัคคีธรรม เมื่อวันที่ <span style="white-space:nowrap">1 มิถุนายน 2569</span></p>
       <span class="todo">.todo รอยอด/จำนวนผู้ร่วมงานจริง</span>
     </div>
   </div>
@@ -310,7 +332,7 @@
 <!-- photo band full-bleed: เปิดบ้าน สิงหาคม 2569 (ภาพจริง: temple-aerial.jpg) -->
 <section class="scene scene-band">
   <div class="photo-band parallax" data-speed="0.1">
-    <img src="img/temple-aerial.jpg" loading="lazy" alt="ภาพมุมสูงจากโดรน มองเห็นวัดเขารังสามัคคีธรรมและพื้นที่โดยรอบ">
+    <img src="../mockup/img/temple-aerial.jpg" loading="lazy" alt="ภาพมุมสูงจากโดรน มองเห็นวัดเขารังสามัคคีธรรมและพื้นที่โดยรอบ">
     <div class="photo-band-text"><div class="wrap reveal">
       <div class="label" style="color:#EAF4EE">เปิดบ้าน</div>
       <h2 style="color:#fff;margin-top:8px"><span style="white-space:nowrap">สิงหาคม 2569</span></h2>
@@ -318,6 +340,22 @@
     </div></div>
   </div>
 </section>
+
+<!-- เส้นหัวใจเชื่อม 3b: เปิดบ้าน → คลิปมุมสูง -->
+<div class="heart-connector" id="hc3b"><span class="hc-chip"></span><svg viewBox="0 0 120 100" aria-hidden="true"><path d="M58,80 C35,64 12,48 12,26 C12,10 28,2 44,8 C52,11 57,18 60,26"/><path d="M62,80 C85,64 108,48 108,26 C108,10 92,2 76,8 C68,11 63,18 60,26"/></svg></div>
+
+<!-- ฉากสว่าง: อาคารเสร็จสมบูรณ์ — คลิปโดรน (ภาพจริง: DJI_0092.MP4 ถ่าย ส.ค. 2569 หลังทาสีเสร็จ) -->
+<section class="scene video-scene"><div class="wrap reveal">
+  <div class="label">อาคารเสร็จสมบูรณ์</div>
+  <h2 style="margin-top:8px">ชมบ้านพึ่งวัด<span style="white-space:nowrap">จากมุมสูง</span></h2>
+  <div class="video-frame">
+    <video controls muted playsinline preload="none" poster="img/drone-poster.jpg" width="720" height="1280">
+      <source src="img/drone-building.mp4" type="video/mp4">
+      เบราว์เซอร์นี้ไม่รองรับการเล่นวิดีโอ — <a href="img/drone-building.mp4">ดาวน์โหลดคลิป</a>
+    </video>
+  </div>
+  <p>มุมมองจากโดรนของอาคารบ้านพึ่งวัด 3 ชั้น หลังคาสีแดง ทาสีเสร็จแล้ว ถ่ายเมื่อเดือนสิงหาคม 2569 ก่อนวันเปิดรับผู้เข้าพัก</p>
+</div></section>
 
 <!-- เส้นหัวใจเชื่อม 4: เปิดบ้าน → ก้าวต่อไป -->
 <div class="heart-connector" id="hc4"><span class="hc-chip"></span><svg viewBox="0 0 120 100" aria-hidden="true"><path d="M58,80 C35,64 12,48 12,26 C12,10 28,2 44,8 C52,11 57,18 60,26"/><path d="M62,80 C85,64 108,48 108,26 C108,10 92,2 76,8 C68,11 63,18 60,26"/></svg></div>
@@ -371,7 +409,7 @@
 <footer>
   <div class="cols">
     <div>
-      <div class="flogo"><img src="logo.jpg" alt="บ้านพึ่งวัด ภูเก็ต"></div>
+      <div class="flogo"><img src="../mockup/logo.jpg" alt="บ้านพึ่งวัด ภูเก็ต"></div>
       <div class="addr">87/7 ถ.เขารัง ต.รัษฎา<br>อ.เมืองภูเก็ต 83000</div>
     </div>
     <div><h4>เมนู</h4>
