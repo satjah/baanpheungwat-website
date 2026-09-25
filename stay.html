@@ -5,7 +5,7 @@
   header/nav/footer/CSS token/scene patterns ก๊อปจาก mockup-v2/index.html (canonical v2) ตาม DESIGN_DIRECTION_V2.md
   เนื้อหาทุกตัวอักษรยกมาจาก www/mockup/stay.html (v1) — งานนี้เปลี่ยนผิวและลำดับการเล่าเรื่องเท่านั้น ไม่เปลี่ยนเนื้อหา
   page hero ย่อ (~46vh) + scrim ล่าง + ชื่อหน้าชิดล่างซ้าย → ขั้นตอนขอเข้าพัก (steps วงกลมเลข) → ภาพห้อง diptych → เนื้อหาที่เหลือ (คุณสมบัติ/เอกสาร/กติกา) เป็นฉากสลับสว่าง-อ่อน
-  🟡 mockup — ยังไม่ launch จริง · เบอร์โทร/แผนที่/เกณฑ์การพิจารณา/กติกาบ้าน ยังเป็น placeholder ติด .todo ทั้งหมด
+  ✅ LIVE www.baanpheungwat.org (22 ก.ย. 2569) · 26 ก.ย. ล้าง .todo ทั้งเว็บ — คุณน้า: "ทำเรื่องบ้านอย่างเดียว" (decisions/log)
 -->
 <html lang="th">
 <head>
@@ -284,7 +284,7 @@
       <p>โทรสอบถามและแจ้งความประสงค์ ทีมงานจะคัดกรองเบื้องต้นทางโทรศัพท์ <span style="white-space:nowrap"><b>065-950-6319</b></span> หรือแจ้งผ่านโรงพยาบาลวชิระภูเก็ตได้ที่ <b>ศูนย์รับบริจาค <span style="white-space:nowrap">อาคารน้อมเกล้า</span></b> หรือ<b>หัวหน้าตึกที่ผู้ป่วยเข้ารับการรักษา</b></p></div>
     <div class="step reveal" style="--d:.09s"><div class="n">2</div>
       <h3>เตรียมเอกสาร</h3>
-      <p>บัตรประชาชน และเอกสารนัดหมาย/การรักษาจากโรงพยาบาล <span class="todo">.todo รอทีมวัดยืนยันรายการเอกสารฉบับสมบูรณ์</span></p></div>
+      <p>เตรียมมาเพียง <b>บัตรประชาชน</b> และ<b>บัตรนัดหมอ</b>จากโรงพยาบาล</p></div>
     <div class="step reveal" style="--d:.18s"><div class="n">3</div>
       <h3>เข้าพัก</h3>
       <p>เข้าพักได้ตามวันที่ตกลงกับทีมงาน ไม่มีค่าใช้จ่ายตลอดการเข้าพัก</p></div>
@@ -338,7 +338,7 @@
       <p>ญาติหรือผู้ดูแลที่เดินทางมาพร้อมผู้ป่วย เพื่อดูแลระหว่างช่วงเวลารักษาตัว</p>
     </div>
   </div>
-  <div class="elig-note reveal">เกณฑ์การพิจารณาโดยละเอียด <span class="todo">.todo รอทีมวัดยืนยันเกณฑ์ทางการ</span></div>
+  <div class="elig-note reveal">ทีมงานจะพิจารณาและแจ้งผลทางโทรศัพท์ สอบถามได้ที่ <a href="tel:0659506319" style="white-space:nowrap">065-950-6319</a></div>
 </div></section>
 
 <!-- การเดินทาง -->
@@ -353,13 +353,10 @@
         <span class="name">บ้านพึ่งวัด ภูเก็ต</span>
         87/7 ถ.เขารัง ต.รัษฎา<br>อ.เมืองภูเก็ต 83000<br>(ข้างวัดเขารังสามัคคีธรรม)
       </div>
-      <a href="https://maps.google.com/?q=วัดเขารังสามัคคีธรรม+ภูเก็ต" target="_blank" rel="noopener"
+      <a href="https://maps.app.goo.gl/gXyvYv5VK24rVMkw9" target="_blank" rel="noopener"
         class="btn btn-outline" style="margin-top:20px">เปิดใน Google Maps</a>
     </div>
-    <div class="map-box reveal" style="--d:.1s">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-7.5-7-12a7 7 0 1 1 14 0c0 4.5-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
-      <span>แผนที่</span><span class="todo">.todo รอ embed แผนที่</span>
-    </div>
+    <div class="map-box reveal" style="--d:.1s;position:relative;overflow:hidden;border:0;padding:0"><iframe src="https://maps.google.com/maps?q=7.8934562,98.3817469&amp;z=16&amp;output=embed" title="แผนที่บ้านพึ่งวัด ภูเก็ต" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe></div>
   </div>
 </div></section>
 
@@ -367,16 +364,14 @@
 <section class="scene-white"><div class="wrap">
   <div class="reveal">
     <div class="label">กติกาบ้าน</div>
-    <h2 style="margin-top:10px">สิ่งที่ควรรู้ก่อนเข้าพัก <span class="todo">.todo รอกติกาทางการจากทีมวัด</span></h2>
+    <h2 style="margin-top:10px">สิ่งที่ควรรู้ก่อนเข้าพัก</h2>
   </div>
   <div class="rules-box reveal" style="margin-top:28px">
-    <div class="rules-note">โครงร่างเบื้องต้นเพื่อให้เห็นภาพ ยังไม่ใช่กติกาทางการ — รอทีมวัดยืนยัน</div>
     <ul>
-      <li>เวลาเข้า-ออกที่พัก และการแจ้งทีมงานล่วงหน้ากรณีเข้า-ออกนอกเวลา</li>
-      <li>การดูแลรักษาความสะอาดของพื้นที่ส่วนกลางร่วมกัน</li>
-      <li>งดเครื่องดื่มแอลกอฮอล์และสิ่งเสพติดทุกชนิดภายในอาคาร</li>
-      <li>งดส่งเสียงดังรบกวนผู้เข้าพักท่านอื่น</li>
-      <li>ปฏิบัติตามคำแนะนำของทีมงานและเจ้าหน้าที่วัดตลอดการเข้าพัก</li>
+      <li>เข้าพักฟรี ไม่มีค่าใช้จ่ายตลอดการเข้าพัก</li>
+      <li>เตรียมบัตรประชาชนและบัตรนัดหมอมาในวันเข้าพัก</li>
+      <li>ทีมงานจะแจ้งกติกาการอยู่ร่วมกันในบ้านให้ทราบในวันเข้าพัก</li>
+      <li>มีข้อสงสัย โทร <a href="tel:0659506319" style="white-space:nowrap">065-950-6319</a></li>
     </ul>
   </div>
 </div></section>
@@ -413,7 +408,7 @@
     </div>
     <div><h4>ติดต่อ</h4>
       <a href="tel:0659506319">โทร 065-950-6319</a>
-      <a href="https://www.facebook.com/profile.php?id=61592626693759" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://www.facebook.com/profile.php?id=61592645109985" target="_blank" rel="noopener">Facebook</a>
       <a href="contact.html">ส่งข้อความถึงเรา</a>
     </div>
   </div>

@@ -7,7 +7,7 @@
   page hero ย่อ (~46vh) + scrim ล่าง + ชื่อหน้าชิดล่างซ้าย → ข้อมูลติดต่อ/แผนที่/จุดสังเกต เป็นฉากสลับสว่าง-อ่อน
   icon ทุกตัว = inline SVG เท่านั้น (v1 ใช้ emoji/glyph 📞 "f" "▦" — v2 ห้ามเด็ดขาดตาม DESIGN_RULES §0)
   ไม่มีระบบฟอร์ม backend Phase นี้ — ไม่มีช่องข้อมูลการเงินหรือฟอร์ม submit ใดๆ (กฎ DESIGN_RULES §2, ตรวจซ้ำแล้ว)
-  🟡 mockup — ยังไม่ launch จริง · เบอร์โทร/ลิงก์ FB/แผนที่ ยังเป็น placeholder ติด .todo ทั้งหมด
+  ✅ LIVE www.baanpheungwat.org (22 ก.ย. 2569) · 26 ก.ย. ล้าง .todo ทั้งเว็บ — คุณน้า: "ทำเรื่องบ้านอย่างเดียว" (decisions/log)
 -->
 <html lang="th">
 <head>
@@ -240,13 +240,13 @@
       <div class="mark"><svg viewBox="0 0 24 24" aria-hidden="true" class="filled"><path d="M14.5 8.5h-2V7c0-.6.4-1 1-1h1V3.2h-1.6C10.9 3.2 9.5 4.6 9.5 6.6V8.5H8V11h1.5v9.5h3V11h2l.4-2.5z"/></svg></div>
       <h3>Facebook</h3>
       <p>บ้านพึ่งวัดภูเก็ต</p>
-      <a href="https://www.facebook.com/profile.php?id=61592626693759" target="_blank" rel="noopener" class="btn btn-outline">ไปที่ Facebook</a>
+      <a href="https://www.facebook.com/profile.php?id=61592645109985" target="_blank" rel="noopener" class="btn btn-outline">ไปที่ Facebook</a>
     </div>
     <div class="ccard reveal" style="--d:.18s">
       <div class="mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-7.5-7-12a7 7 0 1 1 14 0c0 4.5-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
       <h3>เดินทางมาหาเรา</h3>
       <p>87/7 ถ.เขารัง ต.รัษฎา<br>อ.เมืองภูเก็ต 83000<br>(ข้างวัดเขารังสามัคคีธรรม)</p>
-      <a href="https://maps.google.com/?q=วัดเขารังสามัคคีธรรม+ภูเก็ต" target="_blank" rel="noopener" class="btn btn-outline">เปิดใน Google Maps</a>
+      <a href="https://maps.app.goo.gl/gXyvYv5VK24rVMkw9" target="_blank" rel="noopener" class="btn btn-outline">เปิดใน Google Maps</a>
     </div>
   </div>
 </div></section>
@@ -259,7 +259,7 @@
     <p>ขณะนี้เว็บไซต์ยังไม่มีระบบส่งข้อความ ท่านสามารถส่งข้อความหาเราได้ทางเพจ Facebook หรือโทรศัพท์ ทีมงานยินดีตอบทุกคำถาม</p>
     <div class="row">
       <a href="tel:0659506319" class="btn btn-green">โทรหาเรา</a>
-      <a href="https://www.facebook.com/profile.php?id=61592626693759" target="_blank" rel="noopener" class="btn btn-outline">ส่งข้อความทาง Facebook</a>
+      <a href="https://www.facebook.com/profile.php?id=61592645109985" target="_blank" rel="noopener" class="btn btn-outline">ส่งข้อความทาง Facebook</a>
     </div>
   </div>
 </div></section>
@@ -273,10 +273,7 @@
     <div class="label">แผนที่</div>
     <h2 style="margin-top:10px">แผนที่และจุดสังเกต</h2>
   </div>
-  <div class="map-box reveal" style="margin-top:28px">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-7.5-7-12a7 7 0 1 1 14 0c0 4.5-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
-    <span>แผนที่</span><span class="todo">.todo รอ embed แผนที่</span>
-  </div>
+  <div class="map-box reveal" style="margin-top:28px;position:relative;overflow:hidden;border:0;padding:0"><iframe src="https://maps.google.com/maps?q=7.8934562,98.3817469&amp;z=16&amp;output=embed" title="แผนที่บ้านพึ่งวัด ภูเก็ต" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe></div>
   <figure class="reveal" style="margin:26px 0 0">
     <img src="img/temple-aerial.jpg" width="700" height="394" loading="lazy" alt="ภาพมุมสูงเห็นวัดเขารังสามัคคีธรรมและอาคารบ้านพึ่งวัดตั้งอยู่ข้างกัน เชิงเขารัง" style="width:100%;max-width:760px;height:auto;display:block;margin:0 auto;border-radius:10px;border:1px solid var(--hairline)">
     <figcaption style="text-align:center;font-size:15px;color:var(--ink);margin-top:10px">ภาพมุมสูง: บ้านพึ่งวัดอยู่ข้างวัดเขารังสามัคคีธรรม เชิงเขารัง</figcaption>
@@ -312,7 +309,7 @@
     </div>
     <div><h4>ติดต่อ</h4>
       <a href="tel:0659506319">โทร 065-950-6319</a>
-      <a href="https://www.facebook.com/profile.php?id=61592626693759" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://www.facebook.com/profile.php?id=61592645109985" target="_blank" rel="noopener">Facebook</a>
       <a href="contact.html">ส่งข้อความถึงเรา</a>
     </div>
   </div>
